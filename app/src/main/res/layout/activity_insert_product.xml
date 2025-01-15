@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activitys.InsertProductActivity"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <!-- Header TextView -->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FF3131"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="Menu"
+            android:src="@drawable/ic_back_arrow"
+            android:id="@+id/insertProductBackArrow"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Insert Product"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
+
+    <!-- Product Name -->
+    <EditText
+        android:id="@+id/et_product_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Product Name"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:layout_below="@id/linearLayout"
+        android:layout_marginTop="16dp" />
+
+    <!-- Product Price -->
+    <EditText
+        android:id="@+id/et_product_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Product Price"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        android:layout_below="@id/et_product_name"
+        android:layout_marginTop="16dp" />
+
+    <!-- Product Quantity -->
+    <EditText
+        android:id="@+id/et_product_quantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Product Quantity"
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:layout_below="@id/et_product_price"
+        android:layout_marginTop="16dp" />
+
+    <!-- Category Spinner -->
+    <Spinner
+        android:id="@+id/spinner_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_product_quantity"
+        android:layout_marginTop="16dp"
+        android:hint="Select Category" />
+
+    <!-- Product Image -->
+    <ImageView
+        android:id="@+id/iv_selected_image"
+        android:layout_width="match_parent"
+        android:layout_height="167dp"
+        android:layout_below="@id/spinner_category"
+        android:layout_marginTop="16dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/product" />
+
+    <!-- Select Image Button -->
+    <Button
+        android:id="@+id/btn_select_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Image"
+        android:layout_below="@id/iv_selected_image"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#FF3131" />
+
+    <!-- Insert Product Button -->
+    <Button
+        android:id="@+id/btn_insert_product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Insert Product"
+        android:layout_below="@id/btn_select_image"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#FF3131" />
+</RelativeLayout>

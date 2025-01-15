@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "320848983937",
+    "project_id": "oneshop-8adad",
+    "storage_bucket": "oneshop-8adad.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320848983937:android:130ee6e69d54b89ee09a80",
+        "android_client_info": {
+          "package_name": "com.example.oneshop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2wDgUXnxlYVYdmBONJ5KsOd_zy7MWWh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

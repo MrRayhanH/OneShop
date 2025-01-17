@@ -10,9 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ListView;
 
-import com.example.oneshop.DatabaseHelper;
-import com.example.oneshop.ProductAdapter;
-import com.example.oneshop.R;
+import com.example.oneshop.Adapter.ProductAdapter;
 
 //import com.example.myapplication.ui.main.ViewProductFragment;
 public class ViewProductActivity extends AppCompatActivity {

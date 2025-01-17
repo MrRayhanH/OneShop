@@ -73,7 +73,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COL_PRODUCT_IMAGE_URI + " BLOB)");
 
         db.execSQL("CREATE TABLE " + TABLE_CARD + " (" +
-                COL_ID + " INTEGER , " +
+                COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COL_PRODUCT_NAME_CARD + " TEXT, " +
                 COL_CATEGORY_NAME + " TEXT, " +
                 COL_PRODUCT_PRICE_CARD + " REAL, " +
@@ -191,6 +191,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * FROM " + TABLE_PRODUCTS + " WHERE " + COL_PRODUCT_NAME + " = ?", new String[]{productName});
 
     }
+    public Cursor getProductById(int productId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + TABLE_PRODUCTS + " WHERE " + COL_ID + " = ?", new String[]{String.valueOf(productId)});
+    }
     public Cursor getProductsByCategory(String category) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + TABLE_PRODUCTS + " WHERE " + COL_CATEGORY_NAME + " = ?", new String[]{category});
@@ -236,29 +240,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean updateCartQuantity(String productName, int quantity) {
+    public void updateCartQuantity(int id, int newQuantity) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COL_PRODUCT_QUANTITY_CARD, quantity);
-
-        // Update the cart quantity if the product exists, otherwise insert a new row
-        int rowsUpdated = db.update(TABLE_CARD, values, COL_PRODUCT_NAME_CARD + " = ?", new String[]{productName});
-        if (rowsUpdated == 0) {
-            // No rows updated, insert new entry
-            values.put(COL_PRODUCT_NAME_CARD, productName);
-            db.insert(TABLE_CARD, null, values);
-        }
+        values.put(COL_PRODUCT_QUANTITY_CARD, newQuantity);
+        db.update(TABLE_CARD, values, COL_ID + " = ?", new String[]{String.valueOf(id)});
         db.close();
-        return true;
+
     }
+
 
     // Remove product from cart
     public void removeProductFromCart(int cartId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_CARD, COL_CARD_ID + " = ?", new String[]{String.valueOf(cartId)});
+        db.delete(TABLE_CARD, COL_ID + " = ?", new String[]{String.valueOf(cartId)});
         db.close();
-
     }
+
 
     // Get all cart items with product details
 

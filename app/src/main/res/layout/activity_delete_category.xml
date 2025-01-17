@@ -4,8 +4,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activitys.DeleteCategoryActivity"
-    android:padding="16dp"
+    tools:context=".DeleteCategoryActivity"
     android:background="@color/white">
 
     <!-- Toolbar -->
@@ -34,26 +33,37 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_below="@id/linearLayout">
+
+        <EditText
+            android:id="@+id/et_category_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/et_background"
+            android:hint="Category Name"
+            android:textColor="@android:color/black"
+            android:paddingLeft="20dp"
+            android:paddingRight="16dp"/>
+
+    </LinearLayout>
 
     <!-- Category Name EditText -->
-    <EditText
-        android:id="@+id/et_category_name"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/linearLayout"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/et_background"
-        android:hint="Category Name"
-        android:textColor="@android:color/black"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"/>
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/et_category_name"
+        android:layout_below="@id/linearLayout2"
         android:layout_marginTop="16dp"
         android:textSize="20sp"
+        android:textColor="#FF0000"
         android:id="@+id/tv_catagory_name"
         android:text=""/>
 
@@ -68,23 +78,38 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/product" />
 
-    <!-- Search Button -->
-    <Button
-        android:id="@+id/btn_search"
+    <!-- Buttons -->
+    <LinearLayout
+        android:id="@+id/linearLayout_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iv_category"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="@color/Primary"
-        android:text="Search"/>
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:weightSum="2">
 
-    <!-- Delete Category Button -->
-    <Button
-        android:id="@+id/btn_delete_category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btn_search"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="@color/Primary"
-        android:text="Delete"/>
+        <!-- Search Button -->
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/Primary"
+            android:text="Search"
+            android:textColor="@android:color/white" />
+
+        <!-- Delete Category Button -->
+        <Button
+            android:id="@+id/btn_delete_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@color/Primary"
+            android:text="Delete"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
 </RelativeLayout>

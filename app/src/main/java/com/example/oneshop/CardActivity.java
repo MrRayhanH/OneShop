@@ -14,15 +14,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.oneshop.CartAdapter;
-import com.example.oneshop.DatabaseHelper;
-import com.example.oneshop.R;
+import com.example.oneshop.Adapter.CartAdapter;
 
 public class CardActivity extends AppCompatActivity {
 
     private DatabaseHelper databaseHelper;
     private ListView listViewCart;
     private TextView priceTextView, totalProductTextView;
+    private double totalPrice=0 ;
+    private int totalProducts=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,32 +42,24 @@ public class CardActivity extends AppCompatActivity {
         favourite = findViewById(R.id.iv_favourite);
         setting = findViewById(R.id.iv_setting);
 
-        home.setOnClickListener(v -> {
-            startActivity(new Intent(CardActivity.this, ProductsDisplay.class));
-        });
+        home.setOnClickListener(v -> {startActivity(new Intent(CardActivity.this, ProductsDisplay.class));});
+        favourite.setOnClickListener(v -> {startActivity(new Intent(CardActivity.this, FavouriteActivity.class));});
+        setting.setOnClickListener(v -> {startActivity(new Intent(CardActivity.this, SettingActivity.class));});
 
-        favourite.setOnClickListener(v -> {
-            startActivity(new Intent(CardActivity.this, FavouriteActivity.class));
-        });
 
-        setting.setOnClickListener(v -> {
-            startActivity(new Intent(CardActivity.this, SettingActivity.class));
-        });
-
-        // Display cart items and set up the payment button
-        displayCartItems();
 
         Cursor cursor = databaseHelper.getAllCartItems();
         updateTotals(cursor);
         // Handle payment button click
         paymentButton.setOnClickListener(v -> {
-            double totalPrice = getTotalPrice();
-            int totalProducts = getTotalProducts();
+         getTotalPrice();
+         getTotalProducts();
+         Toast.makeText(CardActivity.this, "Payment Done\nTotal Price: $" + totalPrice + "\nTotal Products: " + totalProducts, Toast.LENGTH_SHORT).show();
 
-            Toast.makeText(CardActivity.this, "Payment Done\nTotal Price: $" + totalPrice + "\nTotal Products: " + totalProducts, Toast.LENGTH_SHORT).show();
         });
 
-
+        // Display cart items and set up the payment button
+        displayCartItems();
 
         // status bar transparent
         Window window = getWindow();
@@ -83,6 +75,7 @@ public class CardActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         displayCartItems();
+
     }
     private void displayCartItems() {
         Cursor cursor = databaseHelper.getAllCartItems();
@@ -90,28 +83,24 @@ public class CardActivity extends AppCompatActivity {
         listViewCart.setAdapter(cartAdapter);
     }
 
+    public void refreshTotals() {
+        Cursor cursor = databaseHelper.getAllCartItems();
+        updateTotals(cursor);
+        cursor.close(); // Always close the cursor when done
+    }
 
     private void updateTotals(Cursor cursor) {
-        double totalPrice = 0;
-        int totalProducts = 0;
-
+        getTotalPrice();
+        getTotalProducts();
         // Iterate over the cursor to calculate totals
-        while (cursor.moveToNext()) {
-            double productPrice = cursor.getDouble(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_PRODUCT_PRICE_CARD));
-            int quantity = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_PRODUCT_QUANTITY_CARD));
-            totalPrice += productPrice * quantity;
-            totalProducts += quantity;
-        }
-
         priceTextView.setText(String.format("Total BDT : %.2f", totalPrice));
         totalProductTextView.setText("Total Products : " + totalProducts);
     }
 
     // Optional method to retrieve total price directly
-    private double getTotalPrice() {
+    private void getTotalPrice() {
         Cursor cursor = databaseHelper.getAllCartItems();
-        double totalPrice = 0;
-
+        totalPrice = 0;
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 double productPrice = cursor.getDouble(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_PRODUCT_PRICE_CARD));
@@ -120,14 +109,12 @@ public class CardActivity extends AppCompatActivity {
             } while (cursor.moveToNext());
             cursor.close();
         }
-        return totalPrice;
     }
 
     // Optional method to retrieve total product count directly
-    private int getTotalProducts() {
+    private void getTotalProducts() {
+        totalProducts = 0;
         Cursor cursor = databaseHelper.getAllCartItems();
-        int totalProducts = 0;
-
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 int quantity = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_PRODUCT_QUANTITY_CARD));
@@ -135,6 +122,6 @@ public class CardActivity extends AppCompatActivity {
             } while (cursor.moveToNext());
             cursor.close();
         }
-        return totalProducts;
+
     }
 }

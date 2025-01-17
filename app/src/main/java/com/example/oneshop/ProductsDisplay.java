@@ -16,10 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.oneshop.CategoryAdapter;
-import com.example.oneshop.DatabaseHelper;
-import com.example.oneshop.ProductAdapter1;
-import com.example.oneshop.R;
+import com.example.oneshop.Adapter.CategoryAdapter;
+import com.example.oneshop.Adapter.ProductAdapter1;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 
 import java.util.ArrayList;
@@ -89,10 +87,13 @@ public class ProductsDisplay extends AppCompatActivity {
                             searchAdapter.setOnItemClickListener(position -> {
                                 if (cursorSearch.moveToPosition(position)) {
                                     String productName = cursorSearch.getString(cursorSearch.getColumnIndexOrThrow("productName"));
+                                    Integer productId = cursorSearch.getInt(cursorSearch.getColumnIndexOrThrow("_id"));
 
                                     // Start product detail activity
                                     Intent intent = new Intent(ProductsDisplay.this, ProductDetailsActivity.class);
                                     intent.putExtra("PRODUCT_NAME", productName);
+                                    intent.putExtra("PRODUCT_ID", productId);
+                                    //Toast.makeText(ProductsDisplay.this, "Clicked= " + productId, Toast.LENGTH_SHORT).show();
                                     startActivity(intent);
                                 }
                             });
@@ -142,10 +143,12 @@ public class ProductsDisplay extends AppCompatActivity {
                     adapter.setOnItemClickListener(position1 -> {
                         if (cursorCataryView.moveToPosition(position1)) {
                             String productName = cursorCataryView.getString(cursorCataryView.getColumnIndexOrThrow("productName"));
-
+                            int productId = cursorCataryView.getInt(cursorCataryView.getColumnIndexOrThrow("_id"));
                             // Start product detail activity
                             Intent intent = new Intent(ProductsDisplay.this, ProductDetailsActivity.class);
                             intent.putExtra("PRODUCT_NAME", productName);
+                            intent.putExtra("PRODUCT_ID", productId);
+                            //Toast.makeText(this, "Clicked: " + productId, Toast.LENGTH_SHORT).show();
                             startActivity(intent);
                             
                         }
@@ -162,9 +165,13 @@ public class ProductsDisplay extends AppCompatActivity {
                 if (cursor.moveToPosition(position)) {
                     String productName = cursor.getString(cursor.getColumnIndexOrThrow("productName"));
 
+
                     // Start product detail activity
                     Intent intent = new Intent(ProductsDisplay.this, ProductDetailsActivity.class);
                     intent.putExtra("PRODUCT_NAME", productName);
+                    int productId = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
+                    intent.putExtra("PRODUCT_ID", productId);
+                    //Toast.makeText(this, "Clicked: " + productId, Toast.LENGTH_SHORT).show();
                     startActivity(intent);
 
                     //Toast.makeText(this, "Clicked: " + productName, Toast.LENGTH_SHORT).show();
@@ -177,9 +184,6 @@ public class ProductsDisplay extends AppCompatActivity {
         } catch (Exception e) {
             Log.e(TAG, "Error setting up ProductDisplay", e);
         }
-
-
-
 
         Window window = getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -226,7 +230,7 @@ public class ProductsDisplay extends AppCompatActivity {
 
         if (requestCode == VOICE_SEARCH_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             ArrayList<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            if (results != null && results.size() > 0) {
+            if (results != null && !results.isEmpty()) {
                 String voiceQuery = results.get(0); // Get the top result
                 performSearch(voiceQuery);
             }
@@ -250,10 +254,13 @@ public class ProductsDisplay extends AppCompatActivity {
             searchAdapter.setOnItemClickListener(position -> {
                 if (cursorSearch.moveToPosition(position)) {
                     String productName = cursorSearch.getString(cursorSearch.getColumnIndexOrThrow("productName"));
-
+                    int productId = cursorSearch.getInt(cursorSearch.getColumnIndexOrThrow("_id"));
                     // Start product detail activity
+                   // Toast.makeText(this, "Clicked: " + productId, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ProductsDisplay.this, ProductDetailsActivity.class);
                     intent.putExtra("PRODUCT_NAME", productName);
+                    intent.putExtra("PRODUCT_ID", productId);
+                    //Toast.makeText(this, "Clicked: " + productId, Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                 }
             });

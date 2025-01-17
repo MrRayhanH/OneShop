@@ -14,9 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.oneshop.DatabaseHelper;
-import com.example.oneshop.ProductAdapter1;
-import com.example.oneshop.R;
+import com.example.oneshop.Adapter.ProductAdapter1;
 
 public class FavouriteActivity extends AppCompatActivity {
     private DatabaseHelper databaseHelper;

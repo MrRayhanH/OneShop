@@ -42,10 +42,14 @@ public class LoginActivity extends AppCompatActivity {
             // User is already logged in, redirect to the next screen
             Intent intent = new Intent(LoginActivity.this, ProductsDisplay.class);
             startActivity(intent);
-            //finish();
-            return;}
+            finish();
+            return;
+        }
+
         tv_signup.setOnClickListener(v->{Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);startActivity(intent);});
+
         btn_Login.setOnClickListener(v->{
+
             String Email = et_Username.getText().toString();
             String Password = et_Password.getText().toString();
             if (Email.isEmpty()) {
@@ -69,12 +73,15 @@ public class LoginActivity extends AppCompatActivity {
                                     if(user != null && !user.isEmailVerified()){
                                         Intent intent = new Intent(LoginActivity.this, SendVerificationActivity.class);
                                         startActivity(intent);
+
                                          Toast.makeText(LoginActivity.this, "Please verify your email", Toast.LENGTH_SHORT).show();
                                     }
                                     else if(user != null && user.isEmailVerified()){
                                         et_Username.setText("");
                                         et_Password.setText("");
+                                        finish();
                                         updateUI(user);
+
                                     }
                                     else{
                                         Intent intent = new Intent(LoginActivity.this, SendVerificationActivity.class);

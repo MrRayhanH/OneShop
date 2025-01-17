@@ -1,4 +1,4 @@
-package com.example.oneshop;
+package com.example.oneshop.Adapter;
 
 import android.content.Context;
 import android.database.Cursor;

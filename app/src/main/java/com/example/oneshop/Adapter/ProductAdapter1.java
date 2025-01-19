@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,16 +19,25 @@ import com.example.oneshop.R;
 
 public class ProductAdapter1 extends RecyclerView.Adapter<ProductAdapter1.ProductViewHolder> {
 
-    private Context context;
+    private final Context context;
     private Cursor cursor;
     private OnItemClickListener listener;
+
     public interface OnItemClickListener {
         void onItemClick(int position);
+    }
+    public void swapCursor(Cursor newCursor) {
+        if (cursor != null) {
+            cursor.close();
+        }
+        cursor = newCursor;
+        notifyDataSetChanged();
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
+
     public ProductAdapter1(Context context, Cursor cursor) {
         this.context = context;
         this.cursor = cursor;
@@ -59,17 +69,8 @@ public class ProductAdapter1 extends RecyclerView.Adapter<ProductAdapter1.Produc
         return cursor == null ? 0 : cursor.getCount();
     }
 
-    public void swapCursor(Cursor newCursor) {
-        if (cursor != null) {
-            cursor.close();
-        }
-        cursor = newCursor;
-        if (newCursor != null) {
-            notifyDataSetChanged();
-        }
-    }
 
-    static class ProductViewHolder extends RecyclerView.ViewHolder {
+    class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView;
         TextView priceTextView;
         ImageView productImageView;
@@ -80,13 +81,13 @@ public class ProductAdapter1 extends RecyclerView.Adapter<ProductAdapter1.Produc
             priceTextView = itemView.findViewById(R.id.tv_Product_Price);
             productImageView = itemView.findViewById(R.id.product_image);
 
-            // Set click listener for the entire item
             itemView.setOnClickListener(v -> {
                 if (listener != null) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
                         listener.onItemClick(position);
                     }
+
                 }
             });
         }

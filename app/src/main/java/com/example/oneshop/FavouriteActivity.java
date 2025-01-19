@@ -39,7 +39,7 @@ public class FavouriteActivity extends AppCompatActivity {
 
         try {
             databaseHelper = new DatabaseHelper(this);
-            cursor = databaseHelper.getAllProducts();
+            cursor = databaseHelper.getFavouriteProducts();
         } catch (Exception e) {
             Log.e(TAG, "Error initializing database or fetching products", e);
         }
@@ -51,6 +51,15 @@ public class FavouriteActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(new GridLayoutManager(this, 2)); // 2 columns in grid
             ProductAdapter1 adapter = new ProductAdapter1(this, cursor);
             recyclerView.setAdapter(adapter);
+            adapter.setOnItemClickListener(position -> {
+                if(cursor.moveToPosition(position)){
+                    int productId = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
+                    Intent intent = new Intent(FavouriteActivity.this, ProcductDetailsForFavouriteActivity.class);
+                    intent.putExtra("PRODUCT_ID", productId);
+                    startActivity(intent);
+                }
+            });
+
         } catch (Exception e) {
             Log.e(TAG, "Error setting up RecyclerView", e);
         }
@@ -84,4 +93,5 @@ public class FavouriteActivity extends AppCompatActivity {
             Log.e(TAG, "Error closing database or cursor", e);
         }
     }
+
 }

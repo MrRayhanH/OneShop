@@ -9,13 +9,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Test_DB";
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 5;
 
     // Table Name for register, product , Card
     public static final String TABLE_REGISTER = "register";
     public static final String TABLE_PRODUCTS = "products";
     public static final String TABLE_CARD = "card";
     public static final String TABLE_CATEGORY = "category";
+    public static final String TABLE_FAVOURITE = "favourite";
 
     // Column Names for register
     public static final String COL_ID = "_id";
@@ -45,6 +46,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_CATEGORY_NAME = "categoryName";
     public static final String COL_CATEGORY_IMAGE_URI = "categoryImageUri";
 
+    //For table favourite
+    public static  final String COL_FAVOURITE_ID = "_id";
+    public static  final String COL_FAVOURITE_ID_PRUDUCT = "product_id";
 
     // Constructor for database
     public DatabaseHelper( Context context) {
@@ -85,6 +89,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COL_CATEGORY_NAME + " TEXT, " +
                 COL_CATEGORY_IMAGE_URI + " BLOB)");
+
+        db.execSQL("CREATE TABLE " + TABLE_FAVOURITE + " (" +
+                COL_FAVOURITE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COL_FAVOURITE_ID_PRUDUCT + " INTEGER)");
     }
 
     @Override
@@ -298,6 +306,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COL_CATEGORY_NAME + " LIKE ?";
         return db.rawQuery(query, new String[]{"%" + searchQuery + "%", "%" + searchQuery + "%"});
     }
+
+    public void addToFavourite(int productId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_FAVOURITE_ID_PRUDUCT, productId);
+        db.insert(TABLE_FAVOURITE, null, values);
+        db.close();
+    }
+    public boolean isProductInFavourite(int productId){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_FAVOURITE + " WHERE " + COL_FAVOURITE_ID_PRUDUCT + " = ?", new String[]{String.valueOf(productId)});
+        boolean isFavourite =  cursor.getCount() > 0;
+        cursor.close();;
+        db.close();
+        return isFavourite;
+    }
+
+    public Cursor getFavouriteProducts() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_PRODUCTS +
+                " WHERE " + COL_ID + " IN (" +
+                "SELECT " + COL_FAVOURITE_ID_PRUDUCT + " FROM " + TABLE_FAVOURITE + ")";
+        return db.rawQuery(query, null);
+    }
+    public boolean deleteProductFromFavourite(int productId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rowsDeleted = db.delete(TABLE_FAVOURITE, COL_FAVOURITE_ID_PRUDUCT + " = ?", new String[]{String.valueOf(productId)});
+        db.close();
+        return rowsDeleted !=-1;
+    }
+
 
 
 

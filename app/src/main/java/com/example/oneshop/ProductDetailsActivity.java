@@ -41,28 +41,27 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productQuantityTextView = findViewById(R.id.tv_productQuantity);
         Button btnAddToCart = findViewById(R.id.btn_addToCard);
         iv_favourite = findViewById(R.id.iv_favourite_details);
-
         databaseHelper = new DatabaseHelper(this);
 
         // Get the product name passed from the previous activity
         Intent intent = getIntent();
-       productName = intent.getStringExtra("PRODUCT_NAME");
+        productName = intent.getStringExtra("PRODUCT_NAME");
         productId_favourite = intent.getIntExtra("PRODUCT_ID",-1);
-        //Toast.makeText(this, "Product name: " + productId_favourite, Toast.LENGTH_SHORT).show();
-        //Toast.makeText(this, "Product id: " + productId_favourite, Toast.LENGTH_SHORT).show();
 
         if (productId_favourite!=-1) {
             displayProductDetails();
         }
         else {
-            Toast.makeText(this, "Product name is missing", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Product is missing", Toast.LENGTH_SHORT).show();
         }
 
         // Set up the button to add product to the cart
-        btnAddToCart.setOnClickListener(v -> {addToCart();});
-        iv_favourite.setOnClickListener(v -> {
+        btnAddToCart.setOnClickListener(v -> {addToCard();
+        });
+        iv_favourite.setOnClickListener(v ->{
             addToFavorite();
         });
+
         Window window = getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -98,7 +97,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         else {Toast.makeText(this, "Product not found", Toast.LENGTH_SHORT).show();}
     }
 
-    private void addToCart() {
+    private void addToCard() {
 
 
         boolean isProductInCart = databaseHelper.isProductInCart(productId);
@@ -118,5 +117,16 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
     private void addToFavorite(){
 
+        boolean isProductIn = databaseHelper.isProductInFavourite(productId);
+        if (productName.isEmpty() || productImageByteArray == null || productPrice<=0) {
+            Toast.makeText(this, "Please fill all fields and select an image", Toast.LENGTH_SHORT).show();
+        }
+        else if(!isProductIn){
+            databaseHelper.addToFavourite(productId);
+            Toast.makeText(this, "Added to Favourite", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(this,"Product already in favourite", Toast.LENGTH_SHORT).show();
+        }
     }
 }

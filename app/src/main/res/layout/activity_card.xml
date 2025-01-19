@@ -87,28 +87,28 @@
         <ImageView
             android:id="@+id/iv_home"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:src="@drawable/ic_home" />
 
         <ImageView
             android:id="@+id/iv_favourite"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:src="@drawable/ic_favourite" />
 
         <ImageView
             android:id="@+id/iv_card"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:src="@drawable/ic_card_red" />
 
         <ImageView
             android:id="@+id/iv_setting"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:src="@drawable/ic_setting" />
     </LinearLayout>

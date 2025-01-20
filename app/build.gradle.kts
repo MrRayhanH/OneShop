@@ -53,4 +53,5 @@ dependencies {
     implementation ("com.github.mancj:MaterialSearchBar:0.8.5")
     ("implementation platform('com.google.firebase:firebase-bom:33.7.0')")
     ("implementation 'com.google.firebase:firebase-auth:23.1.0'")
+    ("implementation 'com.airbnb.android:lottie:5.2.0'")
 }

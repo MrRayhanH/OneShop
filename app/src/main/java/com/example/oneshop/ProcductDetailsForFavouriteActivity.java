@@ -82,7 +82,7 @@ public class ProcductDetailsForFavouriteActivity extends AppCompatActivity {
         boolean isProductDeleted = databaseHelper.deleteProductFromFavourite(productId);
         if(isProductDeleted){
             Toast.makeText(this, "Product deleted successfully", Toast.LENGTH_SHORT).show();
-           // FavouriteActivity.refreshRecyclerView();
+            FavouriteActivity.refreshTotals();
             finish();
         }
         else{

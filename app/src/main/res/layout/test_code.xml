@@ -4,7 +4,34 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="@color/white">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp">
 
+        <EditText
+            android:id="@+id/et_confirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="  Confirm Password"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/et_background"
+            android:drawableLeft="@drawable/ic_password"
+            android:autofillHints="password" />
+
+        <ImageView
+            android:id="@+id/iv_eye1st"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_eye"
+            android:padding="10dp"
+            android:clickable="true"
+            android:focusable="true" />
+    </RelativeLayout>
 
 
 

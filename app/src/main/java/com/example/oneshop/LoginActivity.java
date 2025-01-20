@@ -3,11 +3,13 @@ package com.example.oneshop;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
-
+    private boolean isPasswordVisivle = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,8 @@ public class LoginActivity extends AppCompatActivity {
         Button btn_Login = findViewById(R.id.btn_login);
         TextView tv_signup = findViewById(R.id.tv_signUpText);
         TextView tv_forgetPass = findViewById(R.id.tv_forgetPassword);
+        ImageView iv_eye = findViewById(R.id.iv_eye);
+
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null && currentUser.isEmailVerified()) {
             // User is already logged in, redirect to the next screen
@@ -45,23 +49,25 @@ public class LoginActivity extends AppCompatActivity {
             finish();
             return;
         }
-
+        iv_eye.setOnClickListener(v -> { hideShowPass();});
         tv_signup.setOnClickListener(v->{Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);startActivity(intent);});
 
         btn_Login.setOnClickListener(v->{
 
             String Email = et_Username.getText().toString();
             String Password = et_Password.getText().toString();
+            String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+            String passwordRegex ="^[a-zA-Z0-9._-]{6,}$";;
             if (Email.isEmpty()) {
                 Toast.makeText(LoginActivity.this, "Username is empty", Toast.LENGTH_SHORT).show();
             }
+            else if(Email.equals("admin") && Password.equals("admin")){Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);startActivity(intent);}
+            else if (!Email.matches(emailRegex)) {
+                Toast.makeText(LoginActivity.this, "Invalid email format", Toast.LENGTH_SHORT).show();}
             else if(Password.isEmpty()){
-                Toast.makeText(LoginActivity.this, "Invalid Password", Toast.LENGTH_SHORT).show();
-            }
-            else if(Email.equals("admin") && Password.equals("admin")){
-                Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
-                startActivity(intent);
-            }
+                Toast.makeText(LoginActivity.this, "Invalid Password", Toast.LENGTH_SHORT).show();}
+            else if (!Password.matches(passwordRegex)) {
+                Toast.makeText(LoginActivity.this, "Invalid password format", Toast.LENGTH_SHORT).show();}
             else {
                 mAuth.signInWithEmailAndPassword(Email, Password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -73,7 +79,6 @@ public class LoginActivity extends AppCompatActivity {
                                     if(user != null && !user.isEmailVerified()){
                                         Intent intent = new Intent(LoginActivity.this, SendVerificationActivity.class);
                                         startActivity(intent);
-
                                          Toast.makeText(LoginActivity.this, "Please verify your email", Toast.LENGTH_SHORT).show();
                                     }
                                     else if(user != null && user.isEmailVerified()){
@@ -81,7 +86,6 @@ public class LoginActivity extends AppCompatActivity {
                                         et_Password.setText("");
                                         finish();
                                         updateUI(user);
-
                                     }
                                     else{
                                         Intent intent = new Intent(LoginActivity.this, SendVerificationActivity.class);
@@ -123,4 +127,23 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Login failed. Please try again.", Toast.LENGTH_SHORT).show();
             }
         }
+    private void hideShowPass() {
+        EditText et_Password = findViewById(R.id.et_login_password);
+        ImageView iv_eye = findViewById(R.id.iv_eye);
+
+        if (isPasswordVisivle) {
+            // Hide password
+            et_Password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            iv_eye.setImageResource(R.drawable.ic_eye); // Replace with closed-eye icon
+            isPasswordVisivle = false;
+        } else {
+            // Show password
+            et_Password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            iv_eye.setImageResource(R.drawable.ic_eye); // Replace with open-eye icon
+            isPasswordVisivle = true;
+        }
+        // Keep the cursor at the end of the text
+        et_Password.setSelection(et_Password.getText().length());
+    }
+
 }

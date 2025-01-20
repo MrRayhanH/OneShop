@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.oneshop.Adapter.ProductAdapter1;
 
 public class FavouriteActivity extends AppCompatActivity {
-    private DatabaseHelper databaseHelper;
+    private static DatabaseHelper databaseHelper;
     private Cursor cursor;
 
     private static final String TAG = "FavouriteActivity";
@@ -59,11 +59,9 @@ public class FavouriteActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-
         } catch (Exception e) {
             Log.e(TAG, "Error setting up RecyclerView", e);
         }
-
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -75,6 +73,11 @@ public class FavouriteActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
+    }
+
+    public static void refreshTotals() {
+        Cursor cursor = databaseHelper.getFavouriteProducts();
+        cursor.close();
     }
 
     @Override

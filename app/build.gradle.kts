@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
-    ("apply plugin: 'com.google.gms.google-services'")
 }
 
 android {
@@ -49,9 +48,16 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation ("com.makeramen:roundedimageview:2.3.0")
-    implementation ("com.github.mancj:MaterialSearchBar:0.8.5")
-    ("implementation platform('com.google.firebase:firebase-bom:33.7.0')")
-    ("implementation 'com.google.firebase:firebase-auth:23.1.0'")
-    ("implementation 'com.airbnb.android:lottie:5.2.0'")
+    implementation("com.makeramen:roundedimageview:2.3.0")
+    implementation("com.github.mancj:MaterialSearchBar:0.8.5")
+
+    // Firebase BoM and Authentication
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+    implementation("com.google.firebase:firebase-auth")
+
+    // Lottie Animation
+    implementation("com.airbnb.android:lottie:5.2.0")
+
+    // Shimmer Effect
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
 }

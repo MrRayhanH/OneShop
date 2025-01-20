@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true"
     android:background="@color/white"
     tools:context=".RegisterActivity">
@@ -37,6 +37,14 @@
             android:src="@drawable/login_page_img"
             android:padding="16dp" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottiePopup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:lottie_rawRes="@raw/progess_bar_line"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            android:visibility="gone"/>
         <!-- Username -->
         <EditText
             android:id="@+id/et_signup_username"

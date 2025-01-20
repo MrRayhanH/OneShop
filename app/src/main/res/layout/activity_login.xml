@@ -27,6 +27,14 @@
             android:layout_marginBottom="15dp"
             android:contentDescription="Login Page Logo" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottiePopup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:lottie_rawRes="@raw/progess_bar_line"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            android:visibility="gone"/>
         <!-- Welcome Text -->
         <TextView
             android:layout_width="match_parent"

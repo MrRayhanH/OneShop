@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.oneshop.DatabaseHelper;
 import com.example.oneshop.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -93,6 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this, "Invalid mobile format", Toast.LENGTH_SHORT).show();
             }
             else {
+                lottieLoderAnimation();
                 auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
@@ -165,5 +167,11 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             isPasswordVisible2nd = !isPasswordVisible2nd;
         }
+    }
+
+    private void lottieLoderAnimation(){
+        LottieAnimationView lottieLoader = findViewById(R.id.lottiePopup);
+        lottieLoader.setVisibility(View.VISIBLE);
+        lottieLoader.playAnimation();
     }
 }

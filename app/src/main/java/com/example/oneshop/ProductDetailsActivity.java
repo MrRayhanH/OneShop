@@ -62,13 +62,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
             addToFavorite();
         });
 
-        Window window = getWindow();
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getResources().getColor(R.color.status_bar_color_white));
+        stasusBar();
 
-        // Make the status bar icons light (for dark background)
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+
     }
 
     private void displayProductDetails( ) {
@@ -128,5 +125,15 @@ public class ProductDetailsActivity extends AppCompatActivity {
         else{
             Toast.makeText(this,"Product already in favourite", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void stasusBar(){
+        Window window = getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.status_bar_color_white));
+
+        // Make the status bar icons light (for dark background)
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
     }
 }

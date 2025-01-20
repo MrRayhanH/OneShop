@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.Lottie;
 import com.example.oneshop.DatabaseHelper;
 import com.example.oneshop.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,7 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
+import com.airbnb.lottie.LottieAnimationView;
 public class LoginActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
@@ -41,9 +42,11 @@ public class LoginActivity extends AppCompatActivity {
         TextView tv_forgetPass = findViewById(R.id.tv_forgetPassword);
         ImageView iv_eye = findViewById(R.id.iv_eye);
 
+        //View lottieLoader = findViewById(R.id.lottieLoader);
+
+
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null && currentUser.isEmailVerified()) {
-            // User is already logged in, redirect to the next screen
             Intent intent = new Intent(LoginActivity.this, ProductsDisplay.class);
             startActivity(intent);
             finish();
@@ -69,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
             else if (!Password.matches(passwordRegex)) {
                 Toast.makeText(LoginActivity.this, "Invalid password format", Toast.LENGTH_SHORT).show();}
             else {
+                lottieLoderAnimation();
                 mAuth.signInWithEmailAndPassword(Email, Password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -104,18 +108,8 @@ public class LoginActivity extends AppCompatActivity {
 
         tv_forgetPass.setOnClickListener(v -> {Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);startActivity(intent);});
 
-        // Change the status bar color
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(getResources().getColor(R.color.status_bar_color_white));
-        }
+        statusbar();
 
-        // Make the status bar icons light (for dark background)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
     }
 
         private void updateUI(FirebaseUser user) {
@@ -144,6 +138,25 @@ public class LoginActivity extends AppCompatActivity {
         }
         // Keep the cursor at the end of the text
         et_Password.setSelection(et_Password.getText().length());
+    }
+    private void lottieLoderAnimation(){
+        LottieAnimationView lottieLoader = findViewById(R.id.lottiePopup);
+        lottieLoader.setVisibility(View.VISIBLE);
+        lottieLoader.playAnimation();
+    }
+    private void statusbar(){
+        // Change the status bar color
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.status_bar_color_white));
+        }
+
+        // Make the status bar icons light (for dark background)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
     }
 
 }

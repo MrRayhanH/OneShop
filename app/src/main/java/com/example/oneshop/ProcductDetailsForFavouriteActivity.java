@@ -82,7 +82,8 @@ public class ProcductDetailsForFavouriteActivity extends AppCompatActivity {
         boolean isProductDeleted = databaseHelper.deleteProductFromFavourite(productId);
         if(isProductDeleted){
             Toast.makeText(this, "Product deleted successfully", Toast.LENGTH_SHORT).show();
-            FavouriteActivity.refreshTotals();
+            Intent intent = new Intent(ProcductDetailsForFavouriteActivity.this, FavouriteActivity.class);
+            startActivity(intent);
             finish();
         }
         else{

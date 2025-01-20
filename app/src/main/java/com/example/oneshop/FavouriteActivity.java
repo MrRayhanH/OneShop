@@ -31,11 +31,12 @@ public class FavouriteActivity extends AppCompatActivity {
         ImageView home = findViewById(R.id.iv_home);
         ImageView card = findViewById(R.id.iv_card);
         ImageView setting = findViewById(R.id.iv_setting);
+        ImageView back = findViewById(R.id.iv_back);
 
         home.setOnClickListener(v -> startActivity(new Intent(FavouriteActivity.this, ProductsDisplay.class)));
         card.setOnClickListener(v -> startActivity(new Intent(FavouriteActivity.this, CardActivity.class)));
         setting.setOnClickListener(v -> startActivity(new Intent(FavouriteActivity.this, SettingActivity.class)));
-
+        back.setOnClickListener(v -> finish());
 
         try {
             databaseHelper = new DatabaseHelper(this);
@@ -63,22 +64,12 @@ public class FavouriteActivity extends AppCompatActivity {
             Log.e(TAG, "Error setting up RecyclerView", e);
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(getResources().getColor(R.color.status_bar_color_white));
-        }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
+        statusbar();
+
+
     }
 
-    public static void refreshTotals() {
-        Cursor cursor = databaseHelper.getFavouriteProducts();
-        cursor.close();
-    }
 
     @Override
     protected void onDestroy() {
@@ -94,6 +85,19 @@ public class FavouriteActivity extends AppCompatActivity {
             }
         } catch (Exception e) {
             Log.e(TAG, "Error closing database or cursor", e);
+        }
+    }
+
+    private void statusbar(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.status_bar_color_white));
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
     }
 

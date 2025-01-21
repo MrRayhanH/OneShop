@@ -27,6 +27,7 @@
             android:layout_marginBottom="15dp"
             android:contentDescription="Login Page Logo" />
 
+
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottiePopup"
             android:layout_width="match_parent"
@@ -81,14 +82,15 @@
 
             <ImageView
                 android:id="@+id/iv_eye"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_eye"
+                android:src="@drawable/ic_eye_close"
                 android:padding="10dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:layout_marginLeft="10dp"
                 android:contentDescription="Show Password Icon" />
         </RelativeLayout>
 

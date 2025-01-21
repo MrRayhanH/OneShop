@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.Lottie;
@@ -42,7 +44,6 @@ public class LoginActivity extends AppCompatActivity {
         TextView tv_forgetPass = findViewById(R.id.tv_forgetPassword);
         ImageView iv_eye = findViewById(R.id.iv_eye);
 
-        //View lottieLoader = findViewById(R.id.lottieLoader);
 
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -72,7 +73,8 @@ public class LoginActivity extends AppCompatActivity {
             else if (!Password.matches(passwordRegex)) {
                 Toast.makeText(LoginActivity.this, "Invalid password format", Toast.LENGTH_SHORT).show();}
             else {
-                lottieLoderAnimation();
+                showLottieDialog(true);
+                //lottieLoderAnimation();
                 mAuth.signInWithEmailAndPassword(Email, Password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -81,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                                     // Sign in success
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     if(user != null && !user.isEmailVerified()){
+                                        showLottieDialog(false);
                                         Intent intent = new Intent(LoginActivity.this, SendVerificationActivity.class);
                                         startActivity(intent);
                                          Toast.makeText(LoginActivity.this, "Please verify your email", Toast.LENGTH_SHORT).show();
@@ -92,12 +95,14 @@ public class LoginActivity extends AppCompatActivity {
                                         updateUI(user);
                                     }
                                     else{
+                                        showLottieDialog(false);
                                         Intent intent = new Intent(LoginActivity.this, SendVerificationActivity.class);
                                         startActivity(intent);
                                         Toast.makeText(LoginActivity.this, "Please verify your email first", Toast.LENGTH_SHORT).show();
                                     }
                                 } else {
                                     // Sign in failed
+                                    showLottieDialog(false);
                                     Toast.makeText(LoginActivity.this, "Create accunt first " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                     updateUI(null);
                                 }
@@ -107,7 +112,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         tv_forgetPass.setOnClickListener(v -> {Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);startActivity(intent);});
-
         statusbar();
 
     }
@@ -128,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
         if (isPasswordVisivle) {
             // Hide password
             et_Password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            iv_eye.setImageResource(R.drawable.ic_eye); // Replace with closed-eye icon
+            iv_eye.setImageResource(R.drawable.ic_eye_close); // Replace with closed-eye icon
             isPasswordVisivle = false;
         } else {
             // Show password
@@ -140,9 +144,38 @@ public class LoginActivity extends AppCompatActivity {
         et_Password.setSelection(et_Password.getText().length());
     }
     private void lottieLoderAnimation(){
+
+
         LottieAnimationView lottieLoader = findViewById(R.id.lottiePopup);
         lottieLoader.setVisibility(View.VISIBLE);
         lottieLoader.playAnimation();
+    }
+    private AlertDialog lottieDialog; // Keep a reference to the dialog
+    private void showLottieDialog(boolean isLottieDialog) {
+        if (!isLottieDialog) {
+            // If the dialog is currently showing, dismiss it
+            if (lottieDialog != null && lottieDialog.isShowing()) {
+                lottieDialog.dismiss();
+            }
+            return; // Exit the method as there's no need to show the dialog
+        }
+
+        // Inflate the custom layout
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.lottie_alert_dialog, null);
+
+        // Build the AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView)
+                .setCancelable(false) // Optional: Make it non-dismissible
+                .setPositiveButton("OK", (dialog, which) -> {
+                    // Action on "OK" button
+                    dialog.dismiss();
+                });
+
+        // Create and show the dialog
+        lottieDialog = builder.create();
+        lottieDialog.show();
     }
     private void statusbar(){
         // Change the status bar color

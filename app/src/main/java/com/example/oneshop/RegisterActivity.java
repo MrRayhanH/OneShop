@@ -159,7 +159,7 @@ public class RegisterActivity extends AppCompatActivity {
             eyeIcon.setImageResource(R.drawable.ic_eye); // Closed-eye icon
         } else {
             editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            eyeIcon.setImageResource(R.drawable.ic_eye); // Open-eye icon
+            eyeIcon.setImageResource(R.drawable.ic_eye_close); // Open-eye icon
         }
         editText.setSelection(editText.getText().length());
         if (isFirst) {

@@ -30,7 +30,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             startActivity(new Intent(SplashActivity.this, LoginActivity.class));
             finish(); // Finish the SplashActivity
-        }, 5000);
+        }, 3500);
         statusbar();
     }
 

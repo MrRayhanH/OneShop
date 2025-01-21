@@ -89,11 +89,11 @@
 
             <ImageView
                 android:id="@+id/iv_eye1st"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_eye"
+                android:src="@drawable/ic_eye_close"
                 android:padding="10dp"
                 android:clickable="true"
                 android:focusable="true" />
@@ -118,11 +118,11 @@
 
             <ImageView
                 android:id="@+id/iv_eye2nd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_eye"
+                android:src="@drawable/ic_eye_close"
                 android:padding="10dp"
                 android:clickable="true"
                 android:focusable="true" />

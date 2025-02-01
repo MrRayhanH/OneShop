@@ -64,7 +64,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ProductDetailsActivity"
+            android:name=".ProductDisplay.ProductDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".LoginSingup.LoginActivity"

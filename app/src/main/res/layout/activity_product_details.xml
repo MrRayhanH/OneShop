@@ -5,9 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProductDetailsActivity"
+    tools:context=".ProductDisplay.ProductDetailsActivity"
     android:background="@color/white">
 
+    <!-- Product Image -->
     <ImageView
         android:id="@+id/iv_product_image"
         android:layout_width="350dp"
@@ -15,14 +16,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tv_ProductName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.2"
         app:srcCompat="@drawable/product" />
 
+    <!-- Product Name -->
     <TextView
         android:id="@+id/tv_ProductName"
         android:layout_width="0dp"
@@ -37,37 +38,63 @@
         app:layout_constraintStart_toStartOf="@+id/iv_product_image"
         app:layout_constraintTop_toBottomOf="@+id/iv_product_image" />
 
+    <!-- Product Price -->
     <TextView
         android:id="@+id/tv_ProductPrice"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="Total BDT: 0"
         android:fontFamily="@font/roboto_bold"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_ProductName"
         app:layout_constraintStart_toStartOf="@+id/tv_ProductName"
         app:layout_constraintTop_toBottomOf="@+id/tv_ProductName" />
 
+    <!-- Product Quantity -->
     <TextView
         android:id="@+id/tv_productQuantity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="Total Quantity: 0"
         android:fontFamily="@font/roboto_bold"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_ProductPrice"
         app:layout_constraintStart_toStartOf="@+id/tv_ProductPrice"
         app:layout_constraintTop_toBottomOf="@+id/tv_ProductPrice" />
 
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_addToCard"
+        app:layout_constraintEnd_toEndOf="@+id/tv_productQuantity"
+        app:layout_constraintStart_toStartOf="@+id/tv_productQuantity"
+        app:layout_constraintTop_toBottomOf="@+id/tv_productQuantity">
+
+        <TextView
+            android:id="@+id/tv_ProductDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Product Description"
+            android:textSize="16sp" />
+
+    </ScrollView>
+    <!-- Product Description -->
+
+
+    <!-- Favourite Icon -->
     <ImageView
         android:id="@+id/iv_favourite_details"
         android:layout_width="42dp"
         android:layout_height="40dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_productQuantity"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView"
         app:layout_constraintEnd_toEndOf="@+id/iv_product_image"
         app:srcCompat="@drawable/ic_favourite_red"
         app:tint="@color/Primary" />
 
+    <!-- Add to Cart Button -->
     <Button
         android:id="@+id/btn_addToCard"
         android:layout_width="0dp"
@@ -75,7 +102,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="ADD TO CARD"
+        android:text="ADD TO CART"
         android:backgroundTint="@color/Primary"
         android:fontFamily="@font/roboto_bold"
         android:textStyle="bold"

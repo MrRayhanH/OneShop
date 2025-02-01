@@ -1,7 +1,7 @@
 package com.example.oneshop.Products;
 
 public class ProductS {
-    private String product_id, product_name, description, category_name, image_url, image_public_id, seller_user_id;
+    private String product_id, product_name, description, category_name, image_url, image_public_id, seller_user_id, user_id;
     private double price;
     private int stock_quantity;
 
@@ -9,6 +9,7 @@ public class ProductS {
     public ProductS() {}
 
     // Getters and Setters
+    public String getUser_id(){return user_id;}
     public String getProduct_id() { return product_id; }
     public void setProduct_id(String product_id) { this.product_id = product_id; }
 

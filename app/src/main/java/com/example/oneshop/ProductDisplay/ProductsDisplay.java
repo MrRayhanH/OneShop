@@ -4,21 +4,17 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.oneshop.ProductDisplay.CategoryAdapter;
-import com.example.oneshop.Adapter.ProductAdapter;
 import com.example.oneshop.Catagory.Category;
 import com.example.oneshop.Products.ProductS;
 import com.example.oneshop.R;
 import com.example.oneshop.SettingActivity;
 import com.example.oneshop.CardActivity;
 import com.example.oneshop.FavouriteActivity;
-import com.example.oneshop.ProductDetailsActivity;
 import com.google.firebase.database.*;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import java.util.ArrayList;
@@ -114,6 +110,11 @@ public class ProductsDisplay extends AppCompatActivity {
         productAdapter.setOnItemClickListener(product -> {
             Intent intent = new Intent(ProductsDisplay.this, ProductDetailsActivity.class);
             intent.putExtra("PRODUCT_ID", product.getProduct_id());
+            intent.putExtra("PRODUCT_NAME", product.getProduct_name());
+            intent.putExtra("PRODUCT_PRICE", product.getPrice());
+            intent.putExtra("PRODUCT_DESCRIPTION", product.getDescription());
+            intent.putExtra("PRODUCT_IMAGE_URL", product.getImage_url());
+            intent.putExtra("PRODUCT_QUANTITY", product.getStock_quantity());
             startActivity(intent);
         });
     }
@@ -225,7 +226,7 @@ public class ProductsDisplay extends AppCompatActivity {
 //import com.example.oneshop.CardActivity;
 //import com.example.oneshop.DatabaseHelper;
 //import com.example.oneshop.FavouriteActivity;
-//import com.example.oneshop.ProductDetailsActivity;
+//import com.example.oneshop.ProductDisplay.ProductDetailsActivity;
 //import com.example.oneshop.R;
 //import com.example.oneshop.SettingActivity;
 //import com.mancj.materialsearchbar.MaterialSearchBar;

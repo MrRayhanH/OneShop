@@ -1,4 +1,4 @@
-package com.example.oneshop.Adapter;
+package com.example.oneshop.ProductDisplay;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.oneshop.Products.ProductS;
 import com.example.oneshop.R;
 import com.squareup.picasso.Picasso;

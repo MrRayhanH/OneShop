@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ProductsDisplay"
+    tools:context=".ProductDisplay.ProductsDisplay"
     android:background="@color/white">
 
     <!-- Toolbar -->
@@ -14,18 +14,11 @@
         android:padding="7dp"
         >
 
-        <!-- Account Icon -->
-        <ImageView
-            android:id="@+id/iv_account"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_accounts"
-            android:layout_margin="7dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:background="@color/black"
+            android:background="@color/Primary"
             android:padding="3dp">
 
             <com.mancj.materialsearchbar.MaterialSearchBar
@@ -90,7 +83,8 @@
             android:layout_height="30dp"
             android:layout_weight="1"
             android:src="@drawable/ic_home_red"
-            android:contentDescription="Home" />
+            android:contentDescription="Home"
+            app:tint="@color/Primary" />
 
         <ImageView
             android:id="@+id/iv_favourite"

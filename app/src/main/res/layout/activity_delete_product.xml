@@ -1,134 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@color/white"
-    tools:context=".DeleteProductActivity">
+    tools:context=".Products.DeleteProductActivity">
 
-    <!-- Toolbar -->
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_products"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:background="@color/Primary"
-        >
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:contentDescription="Menu"
-            android:src="@drawable/ic_back_arrow"
-            android:id="@+id/deleteBackArrow"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="To Delete search Product by name"
-            android:textColor="#ffffff"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-
-    <!-- Product Name -->
-    <EditText
-        android:id="@+id/text_view_product_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Product Name"
+        android:layout_height="match_parent"
         android:padding="8dp"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:layout_below="@id/linearLayout"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/et_background"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-    <!-- Product Price -->
-    <TextView
-        android:id="@+id/text_view_product_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Product Price"
-        android:inputType="numberDecimal"
-        android:padding="8dp"
-        android:background="@android:color/darker_gray"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:layout_below="@id/text_view_product_name"
-        android:layout_marginTop="8dp"
-        android:enabled="false" />
-
-    <!-- Product Quantity -->
-    <TextView
-        android:id="@+id/text_view_product_quantity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Product Quantity"
-        android:inputType="number"
-        android:padding="8dp"
-        android:background="@android:color/darker_gray"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:layout_below="@id/text_view_product_price"
-        android:layout_marginTop="8dp"
-        android:enabled="false" />
-
-    <!-- Product ID -->
-    <TextView
-        android:id="@+id/text_view_product_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Product ID"
-        android:padding="8dp"
-        android:background="@android:color/darker_gray"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:layout_below="@id/text_view_product_quantity"
-        android:layout_marginTop="8dp"
-        android:enabled="false" />
-
-    <!-- Product Image -->
-    <ImageView
-        android:id="@+id/image_view_product"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:layout_below="@id/text_view_product_id"
-        android:layout_marginTop="16dp" />
-
-    <!-- Horizontal layout for side-by-side buttons -->
-    <LinearLayout
-        android:id="@+id/button_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/image_view_product"
-        android:layout_marginTop="16dp"
-        android:weightSum="2">
-
-        <!-- Search Button -->
-        <Button
-            android:id="@+id/button_search"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Search"
-            android:backgroundTint="#FF3131" />
-
-        <!-- Delete Button -->
-        <Button
-            android:id="@+id/button_delete"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Delete Product"
-            android:backgroundTint="#FF3131" />
-    </LinearLayout>
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

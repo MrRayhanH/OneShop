@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.oneshop.R;
+
+import com.example.oneshop.LoginSingup.LoginActivity;
+import com.example.oneshop.ProductDisplay.ProductsDisplay;
 import com.google.firebase.auth.FirebaseAuth;
 public class SettingActivity extends AppCompatActivity {
 

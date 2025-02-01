@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.oneshop.LoginSingup.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

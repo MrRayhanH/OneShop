@@ -65,7 +65,8 @@
         android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_productQuantity"
         app:layout_constraintEnd_toEndOf="@+id/iv_product_image"
-        app:srcCompat="@drawable/ic_favourite_red" />
+        app:srcCompat="@drawable/ic_favourite_red"
+        app:tint="@color/Primary" />
 
     <Button
         android:id="@+id/btn_addToCard"

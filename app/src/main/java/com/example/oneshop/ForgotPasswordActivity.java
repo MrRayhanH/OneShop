@@ -1,5 +1,6 @@
 package com.example.oneshop;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -7,10 +8,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.oneshop.LoginSingup.LoginActivity;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -29,16 +32,14 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         EditText etEmail = findViewById(R.id.et_email);
         Button btnResetPassword = findViewById(R.id.btn_reset_password);
-
+        ImageView backArrow = findViewById(R.id.BackArrow);
         // Handle Reset Password Button Click
         btnResetPassword.setOnClickListener(v -> {
             String email = etEmail.getText().toString().trim();
-
             if (email.isEmpty()) {
                 Toast.makeText(ForgotPasswordActivity.this, "Please enter your email address.", Toast.LENGTH_SHORT).show();
                 return;
             }
-
             // Send Password Reset Email
             auth.sendPasswordResetEmail(email)
                     .addOnCompleteListener(task -> {
@@ -50,6 +51,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     });
         });
 
+        backArrow.setOnClickListener(v-> {
+            Intent intent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
         // Customize Status Bar
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();

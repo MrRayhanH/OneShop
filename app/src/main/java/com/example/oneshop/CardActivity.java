@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.oneshop.Adapter.CartAdapter;
+import com.example.oneshop.ProductDisplay.ProductsDisplay;
 
 public class CardActivity extends AppCompatActivity {
 
@@ -79,8 +79,8 @@ public class CardActivity extends AppCompatActivity {
     }
     private void displayCartItems() {
         Cursor cursor = databaseHelper.getAllCartItems();
-        CartAdapter cartAdapter = new CartAdapter(this, cursor, 0);
-        listViewCart.setAdapter(cartAdapter);
+        //CartAdapter cartAdapter = new CartAdapter(this, cursor, 0);
+       // listViewCart.setAdapter(cartAdapter);
     }
 
     public void refreshTotals() {

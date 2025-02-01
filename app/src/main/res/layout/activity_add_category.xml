@@ -1,90 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddCategoryActivity"
-    android:padding="16dp"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".Catagory.AddCategoryActivity"
+    android:fillViewport="true">
 
-    <!-- Toolbar -->
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:background="@color/Primary">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:contentDescription="Menu"
-            android:src="@drawable/ic_back_arrow"
-            android:id="@+id/addCatagoryBackArrow"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Add New Catagory"
-            android:textColor="#ffffff"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
+    <!-- Parent Layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="vertical"
-        android:layout_marginTop="100dp"
-        >
+        android:padding="0dp">
 
-        <!-- Category Name Input -->
-        <EditText
+        <!-- Toolbar -->
+        <LinearLayout
+            android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/et_background"
-            android:fontFamily=""
-            android:hint="Category Name"
-            android:paddingStart="20dp"
-            android:textSize="26sp"
-            android:id="@+id/et_catagory_name"/>
-
-        <!-- Image Picker -->
-        <ImageView
-            android:id="@+id/iv_category_image"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="16dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/product" />
-
-        <Button
-            android:id="@+id/btn_select_image"
-            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/black"
-            android:text="Select Image"
-            android:textColor="@android:color/primary_text_dark"
-            android:fontFamily="@font/roboto_bold"/>
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:background="@color/Primary">
 
+            <ImageView
+                android:id="@+id/addCategoryBackArrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_back_arrow"
+                android:contentDescription="Back Arrow" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Add New Category"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Category Form -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="16dp">
+
+            <!-- Category Name Input -->
+            <EditText
+                android:id="@+id/et_category_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/custom_edittext_bg"
+                android:hint="Category Name"
+                android:paddingStart="16dp"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <!-- Image Picker -->
+            <ImageView
+                android:id="@+id/iv_category_image"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="24dp"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/product"
+                android:contentDescription="Category Image" />
+
+            <!-- Select Image Button -->
+            <Button
+                android:id="@+id/btn_select_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center"
+                android:text="Select Image"
+                android:backgroundTint="@color/Primary"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:paddingVertical="12dp"
+                android:padding="12dp"
+                android:elevation="4dp"/>
+
+            <!-- Save Category Button -->
+            <Button
+                android:id="@+id/btn_insert_category"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:text="Save Category"
+                android:backgroundTint="@color/Primary"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:paddingVertical="12dp"
+                android:padding="12dp"
+                android:elevation="4dp"/>
+        </LinearLayout>
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_insert_catagory"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Save Category"
-        android:backgroundTint="@color/Primary"
-        android:textColor="@android:color/white"
-        android:fontFamily="@font/roboto_bold"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"/>
-
-
-</RelativeLayout>
+</ScrollView>

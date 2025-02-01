@@ -1,111 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InsertProductActivity"
-    android:padding="16dp"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".Products.InsertProductActivity"
+    android:fillViewport="true">
 
-    <!-- Header TextView -->
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FF3131"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:contentDescription="Menu"
-            android:src="@drawable/ic_back_arrow"
-            android:id="@+id/insertProductBackArrow"/>
-
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- Header Toolbar -->
+        <LinearLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Insert Product"
-            android:textColor="#ffffff"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            />
+            android:orientation="horizontal"
+            android:background="@color/Primary"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/insertProductBackArrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_back_arrow"
+                android:contentDescription="Back Arrow" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Insert Product"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Content Layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- ProductS Name -->
+            <EditText
+                android:id="@+id/et_product_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Product Name"
+                android:inputType="text"
+                android:minHeight="50dp"
+                android:layout_marginTop="12dp"
+                android:paddingStart="16dp"
+                android:background="@drawable/et_background" />
+
+            <!-- ProductS Description -->
+            <EditText
+                android:id="@+id/et_product_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Product Description"
+                android:inputType="textMultiLine"
+                android:minHeight="80dp"
+                android:layout_marginTop="12dp"
+                android:paddingStart="16dp"
+                android:background="@drawable/et_background" />
+
+            <!-- ProductS Price -->
+            <EditText
+                android:id="@+id/et_product_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Product Price"
+                android:inputType="numberDecimal"
+                android:minHeight="50dp"
+                android:layout_marginTop="12dp"
+                android:paddingStart="16dp"
+                android:background="@drawable/et_background" />
+
+            <!-- ProductS Stock Quantity -->
+            <EditText
+                android:id="@+id/et_product_stock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Stock Quantity"
+                android:inputType="number"
+                android:minHeight="50dp"
+                android:layout_marginTop="12dp"
+                android:paddingStart="16dp"
+                android:background="@drawable/et_background" />
+
+            <!-- Category Spinner -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select Category"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"
+                android:paddingStart="4dp" />
+
+            <Spinner
+                android:id="@+id/spinner_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/spinner_background" />
+
+            <!-- ProductS Image Preview -->
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Image"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp"
+                android:paddingStart="4dp" />
+
+            <ImageView
+                android:id="@+id/iv_selected_image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="8dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/product"
+                android:layout_gravity="center"
+                android:background="@drawable/product"
+                android:contentDescription="Product Image" />
+
+            <!-- Select Image Button -->
+            <Button
+                android:id="@+id/btn_select_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select Image"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/Primary"
+                android:textColor="@android:color/white"
+                android:padding="12dp"
+                android:textStyle="bold" />
+
+            <!-- Insert ProductS Button -->
+            <Button
+                android:id="@+id/btn_insert_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Insert Product"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/Primary"
+                android:textColor="@android:color/white"
+                android:padding="12dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
     </LinearLayout>
-
-
-    <!-- Product Name -->
-    <EditText
-        android:id="@+id/et_product_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Product Name"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:layout_below="@id/linearLayout"
-        android:layout_marginTop="16dp" />
-
-    <!-- Product Price -->
-    <EditText
-        android:id="@+id/et_product_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Product Price"
-        android:inputType="numberDecimal"
-        android:minHeight="48dp"
-        android:layout_below="@id/et_product_name"
-        android:layout_marginTop="16dp" />
-
-    <!-- Product Quantity -->
-    <EditText
-        android:id="@+id/et_product_quantity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Product Quantity"
-        android:inputType="number"
-        android:minHeight="48dp"
-        android:layout_below="@id/et_product_price"
-        android:layout_marginTop="16dp" />
-
-    <!-- Category Spinner -->
-    <Spinner
-        android:id="@+id/spinner_category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/et_product_quantity"
-        android:layout_marginTop="16dp"
-        android:hint="Select Category" />
-
-    <!-- Product Image -->
-    <ImageView
-        android:id="@+id/iv_selected_image"
-        android:layout_width="match_parent"
-        android:layout_height="167dp"
-        android:layout_below="@id/spinner_category"
-        android:layout_marginTop="16dp"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/product" />
-
-    <!-- Select Image Button -->
-    <Button
-        android:id="@+id/btn_select_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Select Image"
-        android:layout_below="@id/iv_selected_image"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#FF3131" />
-
-    <!-- Insert Product Button -->
-    <Button
-        android:id="@+id/btn_insert_product"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Insert Product"
-        android:layout_below="@id/btn_select_image"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#FF3131" />
-</RelativeLayout>
+</ScrollView>

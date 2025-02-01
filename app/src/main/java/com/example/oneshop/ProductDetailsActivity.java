@@ -52,7 +52,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             displayProductDetails();
         }
         else {
-            Toast.makeText(this, "Product is missing", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "ProductS is missing", Toast.LENGTH_SHORT).show();
         }
 
         // Set up the button to add product to the cart
@@ -91,7 +91,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
             cursor.close();  // Close the cursor to avoid memory leaks
         }
-        else {Toast.makeText(this, "Product not found", Toast.LENGTH_SHORT).show();}
+        else {Toast.makeText(this, "ProductS not found", Toast.LENGTH_SHORT).show();}
     }
 
     private void addToCard() {
@@ -105,11 +105,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         else if(!isProductInCart) {
             databaseHelper.addProductToCart(productName, productPrice, 1, productImageByteArray, productId);
-            Toast.makeText(this, "Product inserted successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "ProductS inserted successfully", Toast.LENGTH_SHORT).show();
         }
 
         else{
-            Toast.makeText(this,"Product already in card" , Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"ProductS already in card" , Toast.LENGTH_SHORT).show();
         }
     }
     private void addToFavorite(){
@@ -123,7 +123,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             Toast.makeText(this, "Added to Favourite", Toast.LENGTH_SHORT).show();
         }
         else{
-            Toast.makeText(this,"Product already in favourite", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"ProductS already in favourite", Toast.LENGTH_SHORT).show();
         }
     }
 

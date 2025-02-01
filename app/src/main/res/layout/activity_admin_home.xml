@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminHomeActivity"
+    tools:context=".Admin.AdminHomeActivity"
     android:gravity="center"
     android:background="@color/white">
 
@@ -46,7 +46,7 @@
         android:padding="16dp"
         android:layout_marginBottom="200dp">
 
-        <!-- Card 1: View Product -->
+        <!-- Card 1: View ProductS -->
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="120dp"
@@ -71,19 +71,20 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:contentDescription="Productview Icon"
-                    android:src="@drawable/ic_product_view" />
+                    android:src="@drawable/ic_product_view2" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="View Product"
-                    android:textColor="@color/Primary"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Card 2: Update Product -->
+        <!-- Card 2: Update ProductS -->
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="120dp"
@@ -107,19 +108,20 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:contentDescription="Update Icon"
-                    android:src="@drawable/ic_product_update" />
+                    android:src="@drawable/ic_product_update2" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="Update Product"
-                    android:textColor="@color/Primary"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Card 3: Delete Product -->
+        <!-- Card 3: Delete ProductS -->
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="120dp"
@@ -143,19 +145,20 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:contentDescription="Delete Product"
-                    android:src="@drawable/ic_delete" />
+                    android:src="@drawable/ic_delete3" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="Delete Product"
-                    android:textColor="@color/Primary"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Card 4: insert Product -->
+        <!-- Card 4: insert ProductS -->
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="120dp"
@@ -179,15 +182,16 @@
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:contentDescription="Product Insert icon"
-                    android:src="@drawable/ic_product_insert" />
+                    android:contentDescription="Product Insert icon1"
+                    android:src="@drawable/ic_product_insert5" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="Insert Product"
-                    android:textColor="@color/Primary"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -216,18 +220,19 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:contentDescription="Product Insert icon"
-                    android:src="@drawable/ic_product_insert" />
+                    android:src="@drawable/ic_product_insert3" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="Add new Catagory"
-                    android:textColor="@color/Primary"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-        <!-- Card 3: Delete Product -->
+        <!-- Card 3: Delete ProductS -->
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="120dp"
@@ -251,17 +256,30 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:contentDescription="Delete Catagory"
-                    android:src="@drawable/ic_delete" />
+                    android:src="@drawable/ic_delete3" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="Delete Catagory"
-                    android:textColor="@color/Primary"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
     </GridLayout>
+    <!-- Logout Button -->
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:textColor="@color/white"
+        android:padding="12dp"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/Primary"
+        android:layout_alignParentBottom="true"
+        />
 </RelativeLayout>

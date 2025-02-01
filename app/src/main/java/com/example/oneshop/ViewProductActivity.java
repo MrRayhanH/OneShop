@@ -10,8 +10,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ListView;
 
-import com.example.oneshop.Adapter.ProductAdapter;
-
 //import com.example.myapplication.ui.main.ViewProductFragment;
 public class ViewProductActivity extends AppCompatActivity {
 
@@ -52,8 +50,8 @@ public class ViewProductActivity extends AppCompatActivity {
 
     private void displayProducts() {
         Cursor cursor = databaseHelper.getAllProducts();
-        ProductAdapter adapter = new ProductAdapter(this, cursor, 0);
-        listViewProducts.setAdapter(adapter);
+       // ProductAdapter adapter = new ProductAdapter(this, cursor, 0);
+        //listViewProducts.setAdapter(adapter);
     }
 
 

@@ -1,4 +1,4 @@
-package com.example.oneshop;
+package com.example.oneshop.Catagory;
 
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -22,21 +22,21 @@ import com.example.oneshop.R;
 public class DeleteCategoryActivity extends AppCompatActivity {
     private DatabaseHelper databaseHelper;
     private Cursor cursor;
-
+    EditText et_CategoryName;
+    ImageView iv_category;
+    TextView tv_catagory_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_category);
 
-        EditText et_CategoryName = findViewById(R.id.et_category_name);
+        et_CategoryName = findViewById(R.id.et_category_name);
+        iv_category = findViewById(R.id.iv_category);
+        tv_catagory_name = findViewById(R.id.tv_catagory_name);
         Button btnSearch = findViewById(R.id.btn_search);
         Button btnDeleteCategory = findViewById(R.id.btn_delete_category);
-        ImageView iv_category = findViewById(R.id.iv_category);
-        TextView tv_catagory_name = findViewById(R.id.tv_catagory_name);
         ImageView backArrow = findViewById(R.id.deleteCatagoryBackArrow);
-
         databaseHelper = new DatabaseHelper(this);
-
         backArrow.setOnClickListener(v -> finish());
 
         // Search for category when search button is clicked
@@ -65,19 +65,27 @@ public class DeleteCategoryActivity extends AppCompatActivity {
         btnDeleteCategory.setOnClickListener(v -> {
             String categoryName = et_CategoryName.getText().toString().trim();
             boolean isDeleted = databaseHelper.deleteCategory(categoryName);
-
             if (isDeleted) {Toast.makeText(DeleteCategoryActivity.this, "Category deleted successfully", Toast.LENGTH_SHORT).show();}
             else {Toast.makeText(DeleteCategoryActivity.this, "Failed to delete category", Toast.LENGTH_SHORT).show();}
-
+            clearFields();
         });
 
+        Statusbar();
+    }
+    private void clearFields() {
+        et_CategoryName.setText("");
+        tv_catagory_name.setText("");
+        iv_category.setImageResource(R.drawable.product);
+    }
+
+
+    private void Statusbar(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(getResources().getColor(R.color.status_bar_color_white));
         }
-
         // Make the status bar icons light (for dark background)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);

@@ -15,7 +15,7 @@
         android:padding="5dp"
         app:riv_oval="true"
         android:scaleType="centerCrop"
-        android:background="@color/black"
+        android:background="@color/Primary"
         app:riv_mutate_background="true"/>
 
     <TextView

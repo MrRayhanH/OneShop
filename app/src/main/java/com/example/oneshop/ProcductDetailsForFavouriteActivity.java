@@ -45,7 +45,7 @@ public class ProcductDetailsForFavouriteActivity extends AppCompatActivity {
         if (productId != -1) {
             displayProductDetails(productId);
         } else {
-            Toast.makeText(this, "Product ID is missing", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "ProductS ID is missing", Toast.LENGTH_SHORT).show();
         }
         iv_delete_details.setOnClickListener(v -> {deleteProduct();});
         btnAddToCart.setOnClickListener(v -> {addToCard();});
@@ -75,13 +75,13 @@ public class ProcductDetailsForFavouriteActivity extends AppCompatActivity {
 
             cursor.close(); // Close the cursor to avoid memory leaks
         } else {
-            Toast.makeText(this, "Product not found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "ProductS not found", Toast.LENGTH_SHORT).show();
         }
     }
     private void deleteProduct() {
         boolean isProductDeleted = databaseHelper.deleteProductFromFavourite(productId);
         if(isProductDeleted){
-            Toast.makeText(this, "Product deleted successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "ProductS deleted successfully", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(ProcductDetailsForFavouriteActivity.this, FavouriteActivity.class);
             startActivity(intent);
             finish();
@@ -105,10 +105,10 @@ public class ProcductDetailsForFavouriteActivity extends AppCompatActivity {
             if (!isProductInCart) {
                 // Add product to the cart
                 databaseHelper.addProductToCart(productName, productPrice, 1, productImageByteArray, productId);
-                Toast.makeText(this, "Product inserted successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "ProductS inserted successfully", Toast.LENGTH_SHORT).show();
 
             } else {
-                Toast.makeText(this, "Product already in cart", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "ProductS already in cart", Toast.LENGTH_SHORT).show();
             }
         }
         catch (Exception e) {

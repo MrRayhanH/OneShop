@@ -1,50 +1,71 @@
 package com.example.oneshop.Adapter;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.example.oneshop.DatabaseHelper;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import com.example.oneshop.Products.ProductS;
 import com.example.oneshop.R;
+import com.squareup.picasso.Picasso;
+import java.util.List;
 
-public class ProductAdapter extends CursorAdapter {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
-    public ProductAdapter(Context context, Cursor cursor, int flags) {
-        super(context, cursor, flags);
+    private final Context context;
+    private final List<ProductS> productList;
+    private OnItemClickListener onItemClickListener;
+
+    public ProductAdapter(Context context, List<ProductS> productList) {
+        this.context = context;
+        this.productList = productList;
+    }
+
+    @NonNull
+    @Override
+    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_product_custom, parent, false);
+        return new ProductViewHolder(view);
     }
 
     @Override
-    public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        return inflater.inflate(R.layout.listitemproduct, parent, false);
+    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
+        ProductS product = productList.get(position);
+        holder.tvProductName.setText(product.getProduct_name());
+        holder.tvProductPrice.setText("BDT " + product.getPrice());
+        Picasso.get().load(product.getImage_url()).placeholder(R.drawable.placeholder_image).into(holder.ivProductImage);
+        holder.itemView.setOnClickListener(v -> {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(product);
+            }
+        });
     }
 
     @Override
-    public void bindView(View view, Context context, Cursor cursor) {
-        TextView nameTextView = view.findViewById(R.id.text_view_product_name);
-        TextView priceTextView = view.findViewById(R.id.text_view_product_price);
-        TextView quantityTextView = view.findViewById(R.id.text_view_product_quantity);
-        ImageView productImageView = view.findViewById(R.id.image_view_product);
+    public int getItemCount() {
+        return productList.size();
+    }
 
-        String name = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_PRODUCT_NAME));
-        double price = cursor.getDouble(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_PRODUCT_PRICE));
-        int quantity = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_PRODUCT_QUANTITY));
-        byte[] imageBytes = cursor.getBlob(cursor.getColumnIndexOrThrow(DatabaseHelper.COL_PRODUCT_IMAGE_URI));
+    public static class ProductViewHolder extends RecyclerView.ViewHolder {
+        TextView tvProductName, tvProductPrice;
+        ImageView ivProductImage;
 
-        // Set text and image
-        nameTextView.setText(name);
-        priceTextView.setText(String.valueOf(price));
-        quantityTextView.setText(String.valueOf(quantity));
-        Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-        productImageView.setImageBitmap(bitmap);
+        public ProductViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tvProductName = itemView.findViewById(R.id.tv_product_Name);
+            tvProductPrice = itemView.findViewById(R.id.tv_Product_Price);
+            ivProductImage = itemView.findViewById(R.id.product_image);
+        }
+    }
 
+    public interface OnItemClickListener {
+        void onItemClick(ProductS product);
+    }
 
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
     }
 }

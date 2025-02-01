@@ -45,6 +45,7 @@ dependencies {
     implementation(libs.annotation)
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.firebase.storage)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -54,10 +55,21 @@ dependencies {
     // Firebase BoM and Authentication
     implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
     implementation("com.google.firebase:firebase-auth")
-
+    implementation("com.google.firebase:firebase-database")
     // Lottie Animation
     implementation("com.airbnb.android:lottie:5.2.0")
 
     // Shimmer Effect
     implementation("com.facebook.shimmer:shimmer:0.5.0")
+
+    // cloudinary for iamage store
+    implementation("com.cloudinary:cloudinary-android:3.0.2")
+
+    //recycler view
+    implementation ("androidx.recyclerview:recyclerview:1.2.1")
+    implementation ("com.squareup.picasso:picasso:2.71828")
+
+    //implementation 'com.github.bumptech.glide:glide:4.15.1'
+    //annotationProcessor 'com.github.bumptech.glide:compiler:4.15.1'
+
 }

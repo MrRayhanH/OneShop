@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Seller.OrderActivity">
+    tools:context=".Seller.OrderActivitySeller">
 
     <!-- RecyclerView to display list of orders -->
     <androidx.recyclerview.widget.RecyclerView

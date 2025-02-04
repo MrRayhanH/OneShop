@@ -19,7 +19,7 @@
             android:name=".Seller.SellerHomeActivity"
             android:exported="false" />
         <activity
-            android:name=".Seller.OrderActivity"
+            android:name=".Seller.OrderActivitySeller"
             android:exported="false" />
         <activity
             android:name=".User.OrderActivity"

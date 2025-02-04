@@ -248,7 +248,7 @@ public class CardActivity extends AppCompatActivity implements CardAdapter.OnIte
 //import com.example.oneshop.Products.ProductS;
 //import com.example.oneshop.R;
 //import com.example.oneshop.SettingActivity;
-//import com.example.oneshop.User.OrderActivity;
+//import com.example.oneshop.User.OrderActivitySeller;
 //import com.google.firebase.auth.FirebaseAuth;
 //import com.google.firebase.auth.FirebaseUser;
 //import com.google.firebase.database.DatabaseReference;
@@ -294,7 +294,7 @@ public class CardActivity extends AppCompatActivity implements CardAdapter.OnIte
 //
 //        paymentButton.setOnClickListener(v -> {
 //            createOrder();
-//            Intent intent = new Intent(CardActivity.this, OrderActivity.class);
+//            Intent intent = new Intent(CardActivity.this, OrderActivitySeller.class);
 //            startActivity(intent);
 //            Toast.makeText(CardActivity.this, "Order Created and Payment Done", Toast.LENGTH_SHORT).show();
 //        });
@@ -473,7 +473,7 @@ public class CardActivity extends AppCompatActivity implements CardAdapter.OnIte
 //import com.example.oneshop.Products.ProductS;
 //import com.example.oneshop.R;
 //import com.example.oneshop.SettingActivity;
-//import com.example.oneshop.User.OrderActivity;
+//import com.example.oneshop.User.OrderActivitySeller;
 //import com.google.firebase.auth.FirebaseAuth;
 //import com.google.firebase.auth.FirebaseUser;
 //import com.google.firebase.database.DatabaseReference;
@@ -519,7 +519,7 @@ public class CardActivity extends AppCompatActivity implements CardAdapter.OnIte
 //
 //        paymentButton.setOnClickListener(v -> {
 //            createOrder();
-//            Intent intent = new Intent(CardActivity.this, OrderActivity.class);
+//            Intent intent = new Intent(CardActivity.this, OrderActivitySeller.class);
 //            startActivity(intent);
 //            Toast.makeText(CardActivity.this, "Order Created and Payment Done", Toast.LENGTH_SHORT).show();
 //        });
@@ -704,7 +704,7 @@ public class CardActivity extends AppCompatActivity implements CardAdapter.OnIte
 ////
 ////        paymentButton.setOnClickListener(v -> {
 ////            createOrder();
-////            Intent intent = new Intent(CardActivity.this, OrderActivity.class);
+////            Intent intent = new Intent(CardActivity.this, OrderActivitySeller.class);
 ////            startActivity(intent);
 ////            Toast.makeText(CardActivity.this, "Order Created and Payment Done", Toast.LENGTH_SHORT).show();
 ////        });

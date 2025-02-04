@@ -3,9 +3,13 @@ package com.example.oneshop.Seller;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -89,6 +93,7 @@ public class InsertProductActivity extends AppCompatActivity {
             finish();
             return;
         }
+        statusbar();
     }
 
     private void loadCategories() {
@@ -182,5 +187,17 @@ public class InsertProductActivity extends AppCompatActivity {
                 runOnUiThread(() -> Toast.makeText(this, "Image Upload Failed", Toast.LENGTH_SHORT).show());
             }
         }).start();
+    }
+    private void statusbar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.status_bar_color_white));
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
     }
 }

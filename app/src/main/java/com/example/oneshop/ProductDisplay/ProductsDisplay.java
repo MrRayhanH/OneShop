@@ -13,8 +13,8 @@ import com.example.oneshop.Catagory.Category;
 import com.example.oneshop.Products.ProductS;
 import com.example.oneshop.R;
 import com.example.oneshop.SettingActivity;
-import com.example.oneshop.CardActivity;
-import com.example.oneshop.FavouriteActivity;
+import com.example.oneshop.Card.CardActivity;
+import com.example.oneshop.Favourite.FavouriteActivity;
 import com.google.firebase.database.*;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import java.util.ArrayList;
@@ -115,12 +115,11 @@ public class ProductsDisplay extends AppCompatActivity {
             intent.putExtra("PRODUCT_DESCRIPTION", product.getDescription());
             intent.putExtra("PRODUCT_IMAGE_URL", product.getImage_url());
             intent.putExtra("PRODUCT_QUANTITY", product.getStock_quantity());
+            intent.putExtra("SELLER_ID", product.getSeller_user_id());
             startActivity(intent);
         });
     }
-
     private void filterProductsByCategory(String categoryName) {
-
         productRef.orderByChild("category_name").equalTo(categoryName)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -223,9 +222,9 @@ public class ProductsDisplay extends AppCompatActivity {
 //import androidx.recyclerview.widget.RecyclerView;
 //import com.example.oneshop.Adapter.CategoryAdapter;
 //import com.example.oneshop.Adapter.ProductAdapter1;
-//import com.example.oneshop.CardActivity;
+//import com.example.oneshop.Card.CardActivity;
 //import com.example.oneshop.DatabaseHelper;
-//import com.example.oneshop.FavouriteActivity;
+//import com.example.oneshop.Favourite.FavouriteActivity;
 //import com.example.oneshop.ProductDisplay.ProductDetailsActivity;
 //import com.example.oneshop.R;
 //import com.example.oneshop.SettingActivity;

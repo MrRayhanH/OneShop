@@ -1,8 +1,7 @@
-package com.example.oneshop;
+package com.example.oneshop.Password;
 
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.oneshop.R;

@@ -11,8 +11,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.oneshop.Card.CardActivity;
+import com.example.oneshop.Favourite.FavouriteActivity;
 import com.example.oneshop.LoginSingup.LoginActivity;
 import com.example.oneshop.ProductDisplay.ProductsDisplay;
+import com.example.oneshop.User.OrderActivity;
 import com.google.firebase.auth.FirebaseAuth;
 public class SettingActivity extends AppCompatActivity {
 
@@ -22,7 +25,7 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
 
         Button btn_logout = findViewById(R.id.btn_logout);
-
+        Button btn_order = findViewById(R.id.btn_order);
         ImageView home, card, favourite;
         home = findViewById(R.id.iv_home);
         card = findViewById(R.id.iv_card);
@@ -31,7 +34,7 @@ public class SettingActivity extends AppCompatActivity {
         home.setOnClickListener(v -> {startActivity(new Intent(SettingActivity.this, ProductsDisplay.class));});
         card.setOnClickListener(v -> {startActivity(new Intent(SettingActivity.this, CardActivity.class));});
         favourite.setOnClickListener(v -> {startActivity(new Intent(SettingActivity.this, FavouriteActivity.class));});
-
+        btn_order.setOnClickListener(v -> {startActivity(new Intent(SettingActivity.this, OrderActivity.class));});
         btn_logout.setOnClickListener(v -> {
             FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
             firebaseAuth.signOut();

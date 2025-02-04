@@ -8,13 +8,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.oneshop.Favourite.FavouriteProductDetails;
 import com.example.oneshop.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -24,7 +29,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private ImageView imageView, iv_favourite;
     private TextView tv_productName, tv_productPrice, tv_productQuantity, tv_productDescription;
-    private String productName, productDescription, imageUrl, productId;
+    private String productName, productDescription, imageUrl, productId, sellerid;
     private int productQuantity;
     private double  productPrice;
     private FirebaseDatabase database;
@@ -69,6 +74,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productQuantity = intent.getIntExtra("PRODUCT_QUANTITY",0);  // Ensure quantity is passed
         productDescription = intent.getStringExtra("PRODUCT_DESCRIPTION");
         imageUrl = intent.getStringExtra("PRODUCT_IMAGE_URL");
+        sellerid = intent.getStringExtra("SELLER_ID");
         //userId = intent.getStringExtra("USER_ID");
 
         // Debugging: Ensure product details are passed correctly
@@ -98,20 +104,51 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
     private void addToFavorites() {
-        // Prepare data for Firebase
-        Map<String, Object> favoriteData = new HashMap<>();
-        favoriteData.put("user_id", userId);
-        favoriteData.put("product_id", productId);  // Store productId as a String
+        // Check if product already exists in the favorites
+        DatabaseReference favoritesRef = FirebaseDatabase.getInstance().getReference("Favorites");
 
-        // Add product to favorites in Firebase
-        favoritesRef.push().setValue(favoriteData)
-                .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(ProductDetailsActivity.this, "Added to Favorites", Toast.LENGTH_SHORT).show();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(ProductDetailsActivity.this, "Failed to add to Favorites", Toast.LENGTH_SHORT).show();
+        // Query to find if the current product already exists in the user's favorites
+        favoritesRef.orderByChild("user_id").equalTo(userId)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        boolean isAlreadyFavorite = false;
+
+                        // Iterate over the results to check if the product_id exists
+                        for (DataSnapshot favSnapshot : snapshot.getChildren()) {
+                            String existingProductId = favSnapshot.child("product_id").getValue(String.class);
+                            if (existingProductId != null && existingProductId.equals(productId)) {
+                                isAlreadyFavorite = true;
+                                break;
+                            }
+                        }
+
+                        // If product is not in favorites, add it
+                        if (!isAlreadyFavorite) {
+                            Map<String, Object> favoriteData = new HashMap<>();
+                            favoriteData.put("user_id", userId);
+                            favoriteData.put("product_id", productId);
+
+                            favoritesRef.push().setValue(favoriteData)
+                                    .addOnSuccessListener(aVoid -> {
+                                        Toast.makeText(ProductDetailsActivity.this, "Added to Favorites", Toast.LENGTH_SHORT).show();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(ProductDetailsActivity.this, "Failed to add to Favorites", Toast.LENGTH_SHORT).show();
+                                    });
+                        } else {
+                            // Product is already in favorites
+                            Toast.makeText(ProductDetailsActivity.this, "Product is already in Favorites", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(ProductDetailsActivity.this, "Error checking favorites", Toast.LENGTH_SHORT).show();
+                    }
                 });
     }
+
 
     private void addToCart() {
         // Prepare data for Firebase
@@ -121,12 +158,44 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cartData.put("quantity", 1); // Default to 1 for simplicity
 
         // Add product to cart in Firebase
-        cartRef.push().setValue(cartData)
-                .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(ProductDetailsActivity.this, "Product added to Cart", Toast.LENGTH_SHORT).show();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(ProductDetailsActivity.this, "Failed to add to Cart", Toast.LENGTH_SHORT).show();
+        // Check if the product is already in the cart
+        cartRef.orderByChild("product_id")
+                .equalTo(productId)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            // The product is already in the cart, notify the user
+                            for (DataSnapshot cartSnapshot : snapshot.getChildren()) {
+                                String cartUserId = cartSnapshot.child("user_id").getValue(String.class);
+                                if (cartUserId != null && cartUserId.equals(userId)) {
+                                    // Product already in the cart
+                                    Toast.makeText(ProductDetailsActivity.this, "Product is already in the cart", Toast.LENGTH_SHORT).show();
+                                    return; // Exit the method if product is already in the cart
+                                }
+                            }
+                        }
+
+                        // If the product is not in the cart, add it
+                        Map<String, Object> cartData = new HashMap<>();
+                        cartData.put("user_id", userId);
+                        cartData.put("product_id", productId);
+                        cartData.put("quantity", 1); // Default quantity
+                        cartData.put("seller_user_id", sellerid);
+
+                        cartRef.push().setValue(cartData)
+                                .addOnSuccessListener(aVoid -> {
+                                    Toast.makeText(ProductDetailsActivity.this, "Product added to Cart", Toast.LENGTH_SHORT).show();
+                                })
+                                .addOnFailureListener(e -> {
+                                    Toast.makeText(ProductDetailsActivity.this, "Failed to add to Cart", Toast.LENGTH_SHORT).show();
+                                });
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(ProductDetailsActivity.this, "Error checking cart", Toast.LENGTH_SHORT).show();
+                    }
                 });
     }
 }

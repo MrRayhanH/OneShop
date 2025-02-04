@@ -1,4 +1,4 @@
-package com.example.oneshop.Products;
+package com.example.oneshop.Seller;
 
 import android.os.Bundle;
 import android.widget.Toast;
@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.oneshop.Products.ProductS;
 import com.example.oneshop.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

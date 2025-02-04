@@ -16,10 +16,22 @@
         android:theme="@style/Theme.OneShop"
         tools:targetApi="31">
         <activity
-            android:name=".Products.UpdateProductListActivity"
+            android:name=".Seller.SellerHomeActivity"
             android:exported="false" />
         <activity
-            android:name=".Products.SellerProductView"
+            android:name=".Seller.OrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".User.OrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Favourite.FavouriteProductDetails"
+            android:exported="false" />
+        <activity
+            android:name=".Seller.UpdateProductListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Seller.SellerProductView"
             android:exported="false" />
         <activity
             android:name=".Catagory.CategoryListActivity"
@@ -31,19 +43,16 @@
             android:name=".ProductDisplay.ProductsDisplay"
             android:exported="false" />
         <activity
-            android:name=".ProcductDetailsForFavouriteActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SendVerificationActivity"
+            android:name=".Password.SendVerificationActivity"
             android:exported="false" />
         <activity
             android:name=".Catagory.AddCategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".Products.DeleteProductActivity"
+            android:name=".Seller.DeleteProductActivity"
             android:exported="false" />
         <activity
-            android:name=".CardActivity"
+            android:name=".Card.CardActivity"
             android:exported="false" />
         <activity
             android:name=".Catagory.DeleteCategoryActivity"
@@ -52,13 +61,13 @@
             android:name=".Admin.AdminHomeActivity"
             android:exported="false" />
         <activity
-            android:name=".FavouriteActivity"
+            android:name=".Favourite.FavouriteActivity"
             android:exported="false" />
         <activity
-            android:name=".ForgotPasswordActivity"
+            android:name=".Password.ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".Products.InsertProductActivity"
+            android:name=".Seller.InsertProductActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -70,13 +79,13 @@
             android:name=".LoginSingup.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ResetPasswordActivity"
+            android:name=".Password.ResetPasswordActivity"
             android:exported="false" />
         <activity
             android:name=".SettingActivity"
             android:exported="false" />
         <activity
-            android:name=".Products.UpdateProductActivity"
+            android:name=".Seller.UpdateProductActivity"
             android:exported="false" />
         <activity
             android:name=".ViewProductActivity"

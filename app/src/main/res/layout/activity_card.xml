@@ -6,11 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".CardActivity">
+    tools:context=".Card.CardActivity">
 
     <!-- Cart Items List -->
-    <ListView
-        android:id="@+id/list_view_cart"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_alignParentTop="true"
@@ -41,7 +41,7 @@
                 android:id="@+id/tv_total_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total Price: $ 0"
+                android:text="Total BDT:  0"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="18sp"
                 android:textColor="@color/Primary"
@@ -52,7 +52,7 @@
                 android:id="@+id/tv_total_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total Product Count: 0"
+                android:text="Total Product : 0"
                 android:fontFamily="@font/roboto_bold"
                 android:textSize="18sp"
                 android:textColor="@color/Primary"

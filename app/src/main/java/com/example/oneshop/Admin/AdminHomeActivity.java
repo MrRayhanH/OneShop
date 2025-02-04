@@ -16,13 +16,11 @@ import androidx.cardview.widget.CardView;
 import com.example.oneshop.Catagory.AddCategoryActivity;
 import com.example.oneshop.Catagory.CategoryListActivity;
 import com.example.oneshop.LoginSingup.LoginActivity;
-import com.example.oneshop.Products.DeleteProductActivity;
-import com.example.oneshop.Products.InsertProductActivity;
-import com.example.oneshop.Products.SellerProductView;
-import com.example.oneshop.Products.UpdateProductActivity;
-import com.example.oneshop.Products.UpdateProductListActivity;
+import com.example.oneshop.Seller.DeleteProductActivity;
+import com.example.oneshop.Seller.InsertProductActivity;
+import com.example.oneshop.Seller.SellerProductView;
+import com.example.oneshop.Seller.UpdateProductListActivity;
 import com.example.oneshop.R;
-import com.example.oneshop.SettingActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AdminHomeActivity extends AppCompatActivity {

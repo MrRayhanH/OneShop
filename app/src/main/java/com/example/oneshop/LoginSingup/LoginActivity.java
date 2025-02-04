@@ -19,10 +19,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.oneshop.Admin.AdminHomeActivity;
-import com.example.oneshop.ForgotPasswordActivity;
+import com.example.oneshop.Password.ForgotPasswordActivity;
 import com.example.oneshop.ProductDisplay.ProductsDisplay;
 import com.example.oneshop.R;
-import com.example.oneshop.SendVerificationActivity;
+import com.example.oneshop.Password.SendVerificationActivity;
+import com.example.oneshop.Seller.SellerHomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -123,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                         intent = new Intent(LoginActivity.this, ProductsDisplay.class);
                         startActivity(intent); finish();
                     } else if ("Seller".equals(role)) {
-                        intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
+                        intent = new Intent(LoginActivity.this, SellerHomeActivity.class);
                         startActivity(intent); finish();
                     } else if ("Admin".equals(role)) {
                         intent = new Intent(LoginActivity.this, AdminHomeActivity.class);

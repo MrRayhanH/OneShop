@@ -1,4 +1,4 @@
-package com.example.oneshop;
+package com.example.oneshop.Password;
 
 import android.content.Intent;
 import android.os.Build;
@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.oneshop.LoginSingup.LoginActivity;
+import com.example.oneshop.R;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 

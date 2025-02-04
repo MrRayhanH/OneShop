@@ -1,8 +1,7 @@
-package com.example.oneshop.Products;
+package com.example.oneshop.Seller;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;

@@ -61,7 +61,7 @@
         app:layout_constraintEnd_toEndOf="@+id/tv_ProductPrice"
         app:layout_constraintStart_toStartOf="@+id/tv_ProductPrice"
         app:layout_constraintTop_toBottomOf="@+id/tv_ProductPrice" />
-
+    <!-- Product Description -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
@@ -81,8 +81,6 @@
             android:textSize="16sp" />
 
     </ScrollView>
-    <!-- Product Description -->
-
 
     <!-- Favourite Icon -->
     <ImageView

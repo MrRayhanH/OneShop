@@ -90,6 +90,19 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <Button
+        android:id="@+id/btn_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Order Activity"
+        android:textColor="@color/white"
+        android:padding="12dp"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/Primary"
+        android:layout_above="@+id/btn_logout"
+
+        />
     <!-- Logout Button -->
     <Button
         android:id="@+id/btn_logout"

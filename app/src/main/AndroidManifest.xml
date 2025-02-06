@@ -16,43 +16,64 @@
         android:theme="@style/Theme.OneShop"
         tools:targetApi="31">
         <activity
+            android:name=".Admin.Order.OrderDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.Order.Deleverd.OrderdDeleverdActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.Order.Accept.OrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Admin.Order.OrderdListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Seller.Order.OrderDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".User.AccuntDeleteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Payment.Payment"
+            android:exported="false" />
+        <activity
             android:name=".Seller.SellerHomeActivity"
             android:exported="false" />
         <activity
-            android:name=".Seller.OrderActivitySeller"
+            android:name=".Seller.Order.OrderActivitySeller"
             android:exported="false" />
         <activity
-            android:name=".User.OrderActivity"
+            android:name=".User.Order.OrderActivity"
             android:exported="false" />
         <activity
-            android:name=".Favourite.FavouriteProductDetails"
+            android:name=".User.Favourite.FavouriteProductDetails"
             android:exported="false" />
         <activity
-            android:name=".Seller.UpdateProductListActivity"
+            android:name=".Seller.Update.UpdateProductListActivity"
             android:exported="false" />
         <activity
-            android:name=".Seller.SellerProductView"
+            android:name=".Seller.ViewProduct.SellerProductView"
             android:exported="false" />
         <activity
-            android:name=".Catagory.CategoryListActivity"
+            android:name=".Admin.Catagory.CategoryListActivity"
             android:exported="false" />
         <activity
             android:name=".LoginSingup.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".ProductDisplay.ProductsDisplay"
+            android:name=".User.ProductDisplay.ProductsDisplay"
             android:exported="false" />
         <activity
             android:name=".Password.SendVerificationActivity"
             android:exported="false" />
         <activity
-            android:name=".Catagory.AddCategoryActivity"
+            android:name=".Admin.Catagory.AddCategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".Seller.DeleteProductActivity"
+            android:name=".Seller.Delete.DeleteProductActivity"
             android:exported="false" />
         <activity
-            android:name=".Card.CardActivity"
+            android:name=".User.Card.CardActivity"
             android:exported="false" />
         <activity
             android:name=".Catagory.DeleteCategoryActivity"
@@ -61,19 +82,19 @@
             android:name=".Admin.AdminHomeActivity"
             android:exported="false" />
         <activity
-            android:name=".Favourite.FavouriteActivity"
+            android:name=".User.Favourite.FavouriteActivity"
             android:exported="false" />
         <activity
             android:name=".Password.ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".Seller.InsertProductActivity"
+            android:name=".Seller.Insert.InsertProductActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ProductDisplay.ProductDetailsActivity"
+            android:name=".User.ProductDisplay.ProductDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".LoginSingup.LoginActivity"
@@ -82,10 +103,10 @@
             android:name=".Password.ResetPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingActivity"
+            android:name=".User.Setting.SettingActivity"
             android:exported="false" />
         <activity
-            android:name=".Seller.UpdateProductActivity"
+            android:name=".Seller.Update.UpdateProductActivity"
             android:exported="false" />
         <activity
             android:name=".ViewProductActivity"

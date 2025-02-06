@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Seller.SellerProductView">
+    tools:context=".Seller.ViewProduct.SellerProductView">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_seller_products"
         android:layout_width="match_parent"

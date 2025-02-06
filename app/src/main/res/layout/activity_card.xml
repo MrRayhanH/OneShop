@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Card.CardActivity">
+    tools:context=".User.Card.CardActivity">
 
     <!-- Cart Items List -->
     <androidx.recyclerview.widget.RecyclerView
@@ -24,56 +24,93 @@
         android:id="@+id/total_summary_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:padding="16dp"
         android:background="@color/white"
-        android:weightSum="2"
-        android:layout_above="@id/button_container">
+        android:layout_above="@id/button_container"
+        android:gravity="center_horizontal">
+
+        <!-- Title or Heading for the Summary Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order Summary"
+            android:textSize="16sp"
+        android:textColor="@color/Primary"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal">
 
-            >
-            <TextView
-                android:id="@+id/tv_total_price"
-                android:layout_width="wrap_content"
+            <!-- Total Price Column -->
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Total BDT:  0"
-                android:fontFamily="@font/roboto_bold"
-                android:textSize="18sp"
-                android:textColor="@color/Primary"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="start"
+                android:layout_marginEnd="8dp">
 
-            <!-- Total Products -->
-            <TextView
-                android:id="@+id/tv_total_product"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/tv_total_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total BDT: 0"
+                    android:textSize="14sp"
+                    android:textColor="@color/Primary"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp" />
+            </LinearLayout>
+
+            <!-- Total Products Column -->
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Total Product : 0"
-                android:fontFamily="@font/roboto_bold"
-                android:textSize="18sp"
-                android:textColor="@color/Primary"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="start"
+                android:layout_marginStart="8dp">
+
+                <TextView
+                    android:id="@+id/tv_total_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Products: 0"
+                    android:textSize="14sp"
+                    android:textColor="@color/Primary"
                 android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
 
+        <!-- Optional Divider to make it more organized -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="12dp" />
 
         <!-- Payment Button -->
         <Button
             android:id="@+id/btn_payment"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="Proceed to Payment"
-            android:fontFamily="@font/roboto_bold"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
+            android:textColor="@android:color/white"
             android:backgroundTint="@color/Primary"
-            android:padding="12dp"
-            android:textAllCaps="false" />
+            android:textSize="14sp"
+        android:padding="15dp"
+        android:layout_marginTop="5dp" />
     </LinearLayout>
+
+
+
     <LinearLayout
         android:id="@+id/button_container"
         android:layout_width="match_parent"

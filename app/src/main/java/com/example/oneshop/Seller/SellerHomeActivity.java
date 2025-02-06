@@ -1,5 +1,4 @@
 package com.example.oneshop.Seller;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +14,11 @@ import androidx.cardview.widget.CardView;
 
 import com.example.oneshop.LoginSingup.LoginActivity;
 import com.example.oneshop.R;
+import com.example.oneshop.Seller.Delete.DeleteProductActivity;
+import com.example.oneshop.Seller.Insert.InsertProductActivity;
+import com.example.oneshop.Seller.Order.OrderActivitySeller;
+import com.example.oneshop.Seller.Update.UpdateProductListActivity;
+import com.example.oneshop.Seller.ViewProduct.SellerProductView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SellerHomeActivity extends AppCompatActivity {
@@ -32,7 +36,7 @@ public class SellerHomeActivity extends AppCompatActivity {
         ImageView backArrow = findViewById(R.id.sellerBackArrow);
         // Setting onClick for cards
         CV_InsertProduct.setOnClickListener(v -> {Intent intent = new Intent(SellerHomeActivity.this, InsertProductActivity.class);startActivity(intent);});
-        CV_ViewProduct.setOnClickListener(v -> {Toast.makeText(SellerHomeActivity.this, "View Product", Toast.LENGTH_SHORT).show();Intent intent = new Intent(SellerHomeActivity.this, SellerProductView.class);startActivity(intent);});
+        CV_ViewProduct.setOnClickListener(v -> {Intent intent = new Intent(SellerHomeActivity.this, SellerProductView.class);startActivity(intent);});
         CV_UpdateProduct.setOnClickListener(v -> {Intent intent = new Intent(SellerHomeActivity.this, UpdateProductListActivity.class);startActivity(intent);});
         CV_DeleteProduct.setOnClickListener(v -> {Intent intent = new Intent(SellerHomeActivity.this, DeleteProductActivity.class);startActivity(intent);});
         CV_ViewOrder.setOnClickListener(v -> {Intent intent = new Intent(SellerHomeActivity.this, OrderActivitySeller.class);startActivity(intent);});

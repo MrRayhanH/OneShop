@@ -58,7 +58,7 @@
             android:foreground="?attr/selectableItemBackground"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
-            android:id="@+id/cv_viewProduct">
+            android:id="@+id/cv_viewOder">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -77,7 +77,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="View Product"
+                    android:text="View Order"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
@@ -95,7 +95,7 @@
             android:foreground="?attr/selectableItemBackground"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
-            android:id="@+id/cv_update">
+            android:id="@+id/cv_Deleberd">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -114,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Update Product"
+                    android:text="Deleverd"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
@@ -151,7 +151,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Delete Product"
+                    android:text="Cancle Order"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="14sp" />

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@android:color/white"
+    tools:context=".Seller.Order.OrderDetailsActivity">
+
+    <!-- Order Details Card -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/card_order_details"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Order ID -->
+            <TextView
+                android:id="@+id/tv_order_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Order ID: #123456"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:paddingBottom="8dp"/>
+
+            <!-- Order Date -->
+            <TextView
+                android:id="@+id/tv_order_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Order Date: 2025-02-06"
+                android:textSize="16sp"
+                android:textColor="@color/dark_gray"
+                android:paddingBottom="8dp"/>
+
+            <!-- User ID -->
+            <TextView
+                android:id="@+id/tv_order_user_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="User ID: user_abc123"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:paddingBottom="8dp"/>
+
+            <!-- Seller ID -->
+            <TextView
+                android:id="@+id/tv_order_seller_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Seller ID: seller_xyz789"
+                android:textSize="16sp"
+                android:textColor="@color/dark_gray"
+                android:paddingBottom="8dp"/>
+
+            <!-- Product ID -->
+            <TextView
+                android:id="@+id/tv_order_product_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product ID: product_987654"
+                android:textSize="16sp"
+                android:textColor="@color/dark_gray"
+                android:paddingBottom="8dp"/>
+
+            <!-- Total Price -->
+            <TextView
+                android:id="@+id/tv_order_total_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Price: BDT 49.99"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/holo_green_dark"
+                android:paddingBottom="8dp"/>
+
+            <!-- Total Products -->
+            <TextView
+                android:id="@+id/tv_order_total_products"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Products: 1"
+                android:textSize="16sp"
+                android:textColor="@color/dark_gray"
+                android:paddingBottom="8dp"/>
+
+            <!-- Order Status -->
+            <TextView
+                android:id="@+id/tv_order_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Order Status: Pending"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:paddingBottom="8dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Action Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/card_order_details"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Accept Order Button -->
+        <Button
+            android:id="@+id/btn_accept_order"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Accept Order"
+            android:backgroundTint="@color/Primary"
+            android:textColor="@android:color/white"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:padding="12dp"/>
+
+        <!-- Cancel Order Button -->
+        <Button
+            android:id="@+id/btn_cancel_order"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Cancel Order"
+            android:backgroundTint="@color/Primary"
+            android:textColor="@android:color/white"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:padding="12dp"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

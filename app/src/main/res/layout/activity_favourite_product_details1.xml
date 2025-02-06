@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:layout_margin="10dp"
-    tools:context=".Favourite.FavouriteProductDetails">
+    tools:context=".User.Favourite.FavouriteProductDetails">
 
     <!-- Product Image -->
     <ImageView

@@ -20,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.oneshop.Admin.AdminHomeActivity;
 import com.example.oneshop.Password.ForgotPasswordActivity;
-import com.example.oneshop.ProductDisplay.ProductsDisplay;
+import com.example.oneshop.User.ProductDisplay.ProductsDisplay;
 import com.example.oneshop.R;
 import com.example.oneshop.Password.SendVerificationActivity;
 import com.example.oneshop.Seller.SellerHomeActivity;

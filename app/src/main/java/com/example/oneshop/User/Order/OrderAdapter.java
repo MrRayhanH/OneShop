@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.oneshop.OrderClass.Order;
 import com.example.oneshop.R;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -47,6 +49,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.totalProductsTextView.setText("Total Products: " + order.getTotalProduct());
         holder.tv_order_date.setText("Order Date: " + formattedDate);
         holder.tv_order_status.setText("Order Status: " + order.getOrderStatus());
+        Picasso.get().load(order.getProductImageUrl()).into(holder.productImageView);
     }
 
     @Override
@@ -65,6 +68,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     // ViewHolder class to optimize performance
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView orderIdTextView, totalPriceTextView, totalProductsTextView, tv_order_date, tv_order_status;
+        ImageView productImageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -73,6 +77,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             totalProductsTextView = itemView.findViewById(R.id.tv_order_total_item);
             tv_order_date = itemView.findViewById(R.id.tv_order_date);
             tv_order_status = itemView.findViewById(R.id.tv_order_status);
+            productImageView = itemView.findViewById(R.id.iv_product);
         }
     }
 }

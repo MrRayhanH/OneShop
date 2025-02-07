@@ -5,16 +5,43 @@ xmlns:tools="http://schemas.android.com/tools"
 android:id="@+id/main"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".Admin.Order.Accept.OrderdDetailsActivity">
+tools:context=".Admin.Order.Warehouse.DetailsWarhouseActivity">
+    <!-- Toolbar -->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/Primary"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent">
 
-<ImageView
-    android:id="@+id/iv_product"
-    android:layout_width="200dp"
-    android:layout_height="200dp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    android:background="@drawable/product"
-    app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/adminBackArrow"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="Menu"
+            android:src="@drawable/ic_back_arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Warehouse Products"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_product"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@drawable/product"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 <TextView
     android:id="@+id/tvOrderId"
@@ -65,27 +92,14 @@ tools:context=".Admin.Order.Accept.OrderdDetailsActivity">
     app:layout_constraintEnd_toEndOf="parent"
     android:text="Order Date: "
     android:textSize="16sp" />
-
-<EditText
-    android:id="@+id/etOrderStatus"
+<Button
+    android:id="@+id/btUpdateStatus"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
     app:layout_constraintTop_toBottomOf="@id/tvOrderDate"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    android:hint="Enter New Order Status"
-    android:padding="8dp" />
-
-<Button
-    android:id="@+id/btUpdateStatus"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
-    app:layout_constraintTop_toBottomOf="@id/etOrderStatus"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:text="Update Status" />
+    android:text="Out for delevery" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

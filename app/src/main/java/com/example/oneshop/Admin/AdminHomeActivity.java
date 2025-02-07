@@ -16,13 +16,16 @@ import androidx.cardview.widget.CardView;
 import com.example.oneshop.Admin.Catagory.AddCategoryActivity;
 import com.example.oneshop.Admin.Catagory.CategoryListActivity;
 import com.example.oneshop.Admin.Order.Deleverd.OrderdDeleverdActivity;
+import com.example.oneshop.Admin.Order.OutOfDelivery.OutofDeliveryActivity;
+import com.example.oneshop.Admin.Order.Warehouse.WarhouseActivity;
 import com.example.oneshop.LoginSingup.LoginActivity;
 import com.example.oneshop.Seller.Delete.DeleteProductActivity;
 import com.example.oneshop.Seller.Insert.InsertProductActivity;
 import com.example.oneshop.Seller.ViewProduct.SellerProductView;
 import com.example.oneshop.Seller.Update.UpdateProductListActivity;
 import com.example.oneshop.R;
-import com.example.oneshop.User.Order.OrderActivity;
+import com.example.oneshop.Admin.Order.Accept.OrderActivity;
+import com.example.oneshop.User.Setting.SettingActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AdminHomeActivity extends AppCompatActivity {
@@ -32,21 +35,21 @@ public class AdminHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_home);
 
-        CardView cv_viewOder, cv_Deleberd, CV_DeleteProduct, CV_InsertProduct, CV_InsertCategory, CV_DeleteCategory;
+        CardView cv_viewOder, cv_Deleberd, CV_DeleteProduct, cv_warehouse, CV_InsertCategory, CV_DeleteCategory, CV_outOfDelevery;
 
-        CV_InsertProduct =findViewById(R.id.cv_insert_product);
+        cv_warehouse =findViewById(R.id.cv_warehouse);
         cv_Deleberd =findViewById(R.id.cv_Deleberd);
-        CV_DeleteProduct =findViewById(R.id.cv_delete);
+        CV_outOfDelevery =findViewById(R.id.cv_outOfDelevery);
         cv_viewOder =findViewById(R.id.cv_viewOder);
         CV_InsertCategory =findViewById(R.id.cv_insert_Catagory);
         CV_DeleteCategory =findViewById(R.id.cv_delete_category);
         Button btn_logout = findViewById(R.id.btn_logout);
         ImageView backArrow = findViewById(R.id.adminBackArrow);
 
-        CV_InsertProduct.setOnClickListener(v -> {Intent intent = new Intent(AdminHomeActivity.this, InsertProductActivity.class);startActivity(intent);});
+        cv_warehouse.setOnClickListener(v -> {Intent intent = new Intent(AdminHomeActivity.this, WarhouseActivity.class);startActivity(intent);});
         cv_viewOder.setOnClickListener(v -> {Intent intent = new Intent(AdminHomeActivity.this, OrderActivity.class);startActivity(intent);});
         cv_Deleberd.setOnClickListener(v -> {Intent intent = new Intent(AdminHomeActivity.this, OrderdDeleverdActivity.class);startActivity(intent);});
-        CV_DeleteProduct.setOnClickListener(v -> {Intent intent = new Intent(AdminHomeActivity.this, DeleteProductActivity.class);startActivity(intent);});
+        CV_outOfDelevery.setOnClickListener(v -> {Intent intent = new Intent(AdminHomeActivity.this, OutofDeliveryActivity.class);startActivity(intent);});
         CV_InsertCategory.setOnClickListener(v -> {Intent intent = new Intent(AdminHomeActivity.this, AddCategoryActivity.class);startActivity(intent);});
         CV_DeleteCategory.setOnClickListener(v -> {Intent intent = new Intent(AdminHomeActivity.this, CategoryListActivity.class);startActivity(intent);});
         backArrow.setOnClickListener(v -> finish());
@@ -57,7 +60,11 @@ public class AdminHomeActivity extends AppCompatActivity {
             Toast.makeText(AdminHomeActivity.this, "Logout", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            finish();
+            startActivity(intent);
+            finish(); // Close the current activity
+            //If the target activity is already running in the current task, all activities on top of it are cleared (removed from the stack).
+            // The target activity is brought to the front instead of creating a new instance.
+
         });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();

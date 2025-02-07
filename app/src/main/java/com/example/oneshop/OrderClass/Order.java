@@ -11,13 +11,13 @@ public class Order {
     private String sellerId;      // Seller ID
     private String orderStatus;   // Order status (e.g., Pending, Shipped)
     private String orderDate;     // Order date in string format (ISO 8601)
-    private Uri ImageUrl;
+    private String ImageUrl;
 
     // Default constructor for Firebase
     public Order() {}
 
     public Order(String orderId, double totalPrice, int totalProduct,
-                 String productId, String userId, String sellerId, String orderStatus, String orderDate) {
+                 String productId, String userId, String sellerId, String orderStatus, String orderDate, String ImageUrl) {
         this.orderId = orderId;
         this.userId = userId;
         this.totalPrice = totalPrice;
@@ -26,6 +26,7 @@ public class Order {
         this.sellerId = sellerId;
         this.orderStatus = orderStatus;
         this.orderDate = orderDate;
+        this.ImageUrl = ImageUrl;
     }
 
     // Getters and Setters
@@ -53,9 +54,7 @@ public class Order {
     public String getOrderDate() { return orderDate; }
     public void setOrderDate(String orderDate) { this.orderDate = orderDate; }
 
-    public Uri getProductImageUrl(){
-        return ImageUrl;
-    }
+    public String getProductImageUrl(){return ImageUrl;}
 }
 
 //

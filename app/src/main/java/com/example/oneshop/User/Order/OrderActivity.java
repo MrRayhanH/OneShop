@@ -76,9 +76,15 @@ public class OrderActivity extends AppCompatActivity {
                         String sellerId = orderSnapshot.child("sellerId").getValue(String.class);
                         String orderStatus = orderSnapshot.child("orderStatus").getValue(String.class);
                         String orderDate = orderSnapshot.child("orderDate").getValue(String.class);
-
+                        String imageUrl = orderSnapshot.child("image_url").getValue(String.class);
+                        if(imageUrl!= null) {
+                           // Toast.makeText(OrderActivity.this, "Image URL: " + imageUrl, Toast.LENGTH_SHORT).show();
+                        }
+                        if(totalPrice== null){
+                            Toast.makeText(OrderActivity.this, "Total Price: " + totalPrice, Toast.LENGTH_SHORT).show();
+                        }
                         if (orderId != null && productId != null) {
-                            Order order = new Order(orderId, totalPrice, totalProduct, productId, userId, sellerId, orderStatus, orderDate);
+                            Order order = new Order(orderId, totalPrice, totalProduct, productId, userId, sellerId, orderStatus, orderDate, imageUrl);
                             orders.add(order);
                         }
                     }

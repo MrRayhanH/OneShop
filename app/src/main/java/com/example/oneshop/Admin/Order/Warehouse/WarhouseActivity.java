@@ -1,4 +1,4 @@
-package com.example.oneshop.Admin.Order.Deleverd;
+package com.example.oneshop.Admin.Order.Warehouse;
 
 import android.os.Bundle;
 import android.widget.Toast;
@@ -12,8 +12,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.oneshop.Admin.Order.Warehouse.WarhouseActivity;
-import com.example.oneshop.Admin.Order.Warehouse.WarhouseAdapter;
+import com.example.oneshop.Admin.Order.Accept.OrderActivity;
+import com.example.oneshop.Admin.Order.Accept.OrderAdapter;
 import com.example.oneshop.OrderClass.Order;
 import com.example.oneshop.R;
 import com.google.firebase.database.DataSnapshot;
@@ -24,39 +24,37 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class OrderdDeleverdActivity extends AppCompatActivity {
+public class WarhouseActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private OrderdDeleverdAdapter orderdDeleverdAdapter;
+    private WarhouseAdapter warhouseAdapter;
     private ArrayList<Order> orderList;
     private DatabaseReference ordersRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_orderd_deleverd);
+        setContentView(R.layout.activity_warhouse);
 
         recyclerView = findViewById(R.id.recycler_view_orders);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         orderList = new ArrayList<>();
-        orderdDeleverdAdapter = new OrderdDeleverdAdapter(this, orderList);
-        recyclerView.setAdapter(orderdDeleverdAdapter);
+        warhouseAdapter = new WarhouseAdapter(this, orderList);
+        recyclerView.setAdapter(warhouseAdapter);
 
         ordersRef = FirebaseDatabase.getInstance().getReference("orders");
 
         loadAcceptedOrders();
-
-
     }
 
     private void loadAcceptedOrders() {
-        ordersRef.orderByChild("orderStatus").equalTo("Product Delivered").addListenerForSingleValueEvent(new ValueEventListener() {
+        ordersRef.orderByChild("orderStatus").equalTo("Warehouse").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 orderList.clear();
 
                 if (!snapshot.exists()) {
-                    Toast.makeText(OrderdDeleverdActivity.this, "No Products Found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(WarhouseActivity.this, "No Accepted Orders Found", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -77,13 +75,14 @@ public class OrderdDeleverdActivity extends AppCompatActivity {
                     }
                 }
 
-                orderdDeleverdAdapter.notifyDataSetChanged();
+                warhouseAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(OrderdDeleverdActivity.this, "Failed to load Products Delivered: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(WarhouseActivity.this, "Failed to load accepted orders: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 }

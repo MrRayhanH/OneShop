@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.oneshop.R;
 import com.example.oneshop.User.AccuntDeleteActivity;
+import com.example.oneshop.User.AddressActivity;
 import com.example.oneshop.User.Card.CardActivity;
 import com.example.oneshop.User.Favourite.FavouriteActivity;
 import com.example.oneshop.LoginSingup.LoginActivity;
@@ -33,6 +34,8 @@ public class SettingActivity extends AppCompatActivity {
         home = findViewById(R.id.iv_home);
         card = findViewById(R.id.iv_card);
         favourite = findViewById(R.id.iv_favourite);
+        TextView address_book = findViewById(R.id.address_book);
+        address_book.setOnClickListener(v -> {startActivity(new Intent(SettingActivity.this, AddressActivity.class));});
         TextView account_delet = findViewById(R.id.request_account_deletion);
         home.setOnClickListener(v -> {startActivity(new Intent(SettingActivity.this, ProductsDisplay.class));});
         card.setOnClickListener(v -> {startActivity(new Intent(SettingActivity.this, CardActivity.class));});

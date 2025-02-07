@@ -182,6 +182,7 @@ public class CardActivity extends AppCompatActivity implements CardAdapter.OnIte
                 orderDetails.put("orderStatus", "Pending");
                 orderDetails.put("orderDate", getCurrentTimestamp());
                 orderDetails.put("image_url", product.getImage_public_id());
+                orderDetails.put("product_name", product.getProduct_name());
                 ordersRef.child(orderId).setValue(orderDetails)
                         .addOnSuccessListener(aVoid ->
                                 Toast.makeText(CardActivity.this, "Order placed successfully!", Toast.LENGTH_SHORT).show())

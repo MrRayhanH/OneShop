@@ -132,7 +132,7 @@
             android:foreground="?attr/selectableItemBackground"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
-            android:id="@+id/cv_delete">
+            android:id="@+id/cv_outOfDelevery">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -151,7 +151,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Cancle Order"
+                    android:text="Out of delivery"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
@@ -170,7 +170,7 @@
             android:foreground="?attr/selectableItemBackground"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
-            android:id="@+id/cv_insert_product">
+            android:id="@+id/cv_warehouse">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -189,12 +189,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Insert Product"
+                    android:text="In warehouse"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
         <!-- Card 4: insert Catagory -->
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
@@ -268,6 +269,7 @@
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
 
     </GridLayout>
     <!-- Logout Button -->

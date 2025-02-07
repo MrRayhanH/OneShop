@@ -1,4 +1,4 @@
-package com.example.oneshop.Admin.Order.Deleverd;
+package com.example.oneshop.Admin.Order.Warehouse;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,31 +12,32 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.oneshop.Admin.Order.Accept.DetailsActivity;
-import com.example.oneshop.Admin.Order.Accept.OrderAdapter;
 import com.example.oneshop.OrderClass.Order;
 import com.example.oneshop.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class OrderdDeleverdAdapter extends RecyclerView.Adapter<OrderdDeleverdAdapter.ViewHolder> {
+public class WarhouseAdapter extends RecyclerView.Adapter<WarhouseAdapter.ViewHolder> {
+
     private final Context context;
     private final ArrayList<Order> orderList;
 
-    public OrderdDeleverdAdapter(Context context, ArrayList<Order> orderList) {
+    // Constructor for WarhouseAdapter
+    public WarhouseAdapter(Context context, ArrayList<Order> orderList) {
         this.context = context;
         this.orderList = orderList;
     }
 
     @NonNull
     @Override
-    public OrderdDeleverdAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_order_admin, parent, false);
-        return new OrderdDeleverdAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OrderdDeleverdAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Order order = orderList.get(position);
 
         // Set order details to views
@@ -44,25 +45,31 @@ public class OrderdDeleverdAdapter extends RecyclerView.Adapter<OrderdDeleverdAd
         holder.tvTotalPrice.setText("Total Price: BDT " + order.getTotalPrice());
         holder.tvTotalProduct.setText("Total Product: " + order.getTotalProduct());
         holder.tvStatus.setText("Status: " + order.getOrderStatus());
-        Picasso.get().load(order.getProductImageUrl()).into(holder.ivProductImage);
 
+        // Load product image using Picasso
+        Picasso.get()
+                .load(order.getProductImageUrl())
+                .placeholder(R.drawable.placeholder_image)  // Placeholder image
+                .error(R.drawable.error_image)  // Error image if loading fails
+                .fit()
+                .centerCrop()
+                .into(holder.ivProductImage);
 
-        // Handle item click to navigate to OrderdDetailsActivity
-//        holder.itemView.setOnClickListener(v -> {
-//            //Intent intent = new Intent(context, OrderdDetailsActivity.class);
-//            Intent intent = new Intent(context, DetailsActivity.class);
-//
-//            intent.putExtra("orderId", order.getOrderId());
-//            intent.putExtra("productImage", order.getProductImageUrl());
-//            intent.putExtra("totalPrice", order.getTotalPrice());
-//            intent.putExtra("totalProduct", order.getTotalProduct());
-//            intent.putExtra("productId", order.getProductId());
-//            intent.putExtra("userId", order.getUserId());
-//            intent.putExtra("sellerId", order.getSellerId());
-//            intent.putExtra("orderStatus", order.getOrderStatus());
-//            intent.putExtra("orderDate", order.getOrderDate());
-//            context.startActivity(intent);
-//        });
+        // Handle item click to navigate to DetailsActivity
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DetailsWarhouseActivity.class);
+
+            intent.putExtra("orderId", order.getOrderId());
+            intent.putExtra("productImage", order.getProductImageUrl());
+            intent.putExtra("totalPrice", order.getTotalPrice());
+            intent.putExtra("totalProduct", order.getTotalProduct());
+            intent.putExtra("productId", order.getProductId());
+            intent.putExtra("userId", order.getUserId());
+            intent.putExtra("sellerId", order.getSellerId());
+            intent.putExtra("orderStatus", order.getOrderStatus());
+            intent.putExtra("orderDate", order.getOrderDate());
+            context.startActivity(intent);
+        });
     }
 
     @Override

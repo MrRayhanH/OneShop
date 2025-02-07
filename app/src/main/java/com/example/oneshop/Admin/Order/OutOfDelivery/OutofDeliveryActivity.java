@@ -1,4 +1,4 @@
-package com.example.oneshop.Admin.Order.Deleverd;
+package com.example.oneshop.Admin.Order.OutOfDelivery;
 
 import android.os.Bundle;
 import android.widget.Toast;
@@ -24,39 +24,35 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class OrderdDeleverdActivity extends AppCompatActivity {
-
+public class OutofDeliveryActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private OrderdDeleverdAdapter orderdDeleverdAdapter;
+    private OutOfDeleveryAdapter outOfDeleveryAdapter;
     private ArrayList<Order> orderList;
     private DatabaseReference ordersRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_orderd_deleverd);
-
+        setContentView(R.layout.activity_outof_delivery);
         recyclerView = findViewById(R.id.recycler_view_orders);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         orderList = new ArrayList<>();
-        orderdDeleverdAdapter = new OrderdDeleverdAdapter(this, orderList);
-        recyclerView.setAdapter(orderdDeleverdAdapter);
+        outOfDeleveryAdapter = new OutOfDeleveryAdapter(this, orderList);
+        recyclerView.setAdapter(outOfDeleveryAdapter);
 
         ordersRef = FirebaseDatabase.getInstance().getReference("orders");
 
         loadAcceptedOrders();
 
-
     }
-
     private void loadAcceptedOrders() {
-        ordersRef.orderByChild("orderStatus").equalTo("Product Delivered").addListenerForSingleValueEvent(new ValueEventListener() {
+        ordersRef.orderByChild("orderStatus").equalTo("Out of delivery").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 orderList.clear();
 
                 if (!snapshot.exists()) {
-                    Toast.makeText(OrderdDeleverdActivity.this, "No Products Found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OutofDeliveryActivity.this, "No Accepted Orders Found", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -77,12 +73,12 @@ public class OrderdDeleverdActivity extends AppCompatActivity {
                     }
                 }
 
-                orderdDeleverdAdapter.notifyDataSetChanged();
+                outOfDeleveryAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(OrderdDeleverdActivity.this, "Failed to load Products Delivered: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(OutofDeliveryActivity.this, "Failed to load accepted orders: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

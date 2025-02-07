@@ -7,7 +7,7 @@ android:id="@+id/main"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:background="@android:color/white"
-tools:context=".Admin.Order.Deleverd.OrderdDeleverdActivity">
+tools:context=".Admin.Order.Warehouse.WarhouseActivity">
 
 <!-- Toolbar -->
 <LinearLayout
@@ -31,7 +31,7 @@ tools:context=".Admin.Order.Deleverd.OrderdDeleverdActivity">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Out of delivery Products"
+        android:text="Warehouse Products"
         android:textColor="#ffffff"
         android:textSize="18sp"
         android:textStyle="bold" />

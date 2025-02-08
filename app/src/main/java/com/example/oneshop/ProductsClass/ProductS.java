@@ -92,6 +92,7 @@ public class ProductS {
     public void setQuantity(int quantity) {
         this.quantity = quantity;  // Setter for quantity
     }
+
 }
 
 //package com.example.oneshop.Products;

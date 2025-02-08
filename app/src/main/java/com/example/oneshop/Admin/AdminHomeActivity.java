@@ -21,6 +21,7 @@ import com.example.oneshop.Admin.Order.Warehouse.WarhouseActivity;
 import com.example.oneshop.LoginSingup.LoginActivity;
 import com.example.oneshop.Seller.Delete.DeleteProductActivity;
 import com.example.oneshop.Seller.Insert.InsertProductActivity;
+import com.example.oneshop.Seller.SellerHomeActivity;
 import com.example.oneshop.Seller.ViewProduct.SellerProductView;
 import com.example.oneshop.Seller.Update.UpdateProductListActivity;
 import com.example.oneshop.R;
@@ -55,17 +56,32 @@ public class AdminHomeActivity extends AppCompatActivity {
         backArrow.setOnClickListener(v -> finish());
 
         btn_logout.setOnClickListener(v -> {
-            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-            firebaseAuth.signOut();
-            Toast.makeText(AdminHomeActivity.this, "Logout", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish(); // Close the current activity
+            logout();
+//            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+//            firebaseAuth.signOut();
+//            Toast.makeText(AdminHomeActivity.this, "Logout", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(this, LoginActivity.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(intent);
+//            finish(); // Close the current activity
             //If the target activity is already running in the current task, all activities on top of it are cleared (removed from the stack).
             // The target activity is brought to the front instead of creating a new instance.
 
         });
+
+        statusBar();
+    }
+    private void logout() {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.signOut();
+        Toast.makeText(AdminHomeActivity.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void statusBar(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -77,9 +93,6 @@ public class AdminHomeActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
-
-
-        }
-
+    }
 
 }

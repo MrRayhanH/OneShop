@@ -66,6 +66,7 @@ public class ProductsDisplay extends AppCompatActivity {
         loadProducts();
         setupNavigation();
         setupSearchBar();
+        statusBar();
     }
 
     private void loadCategories() {
@@ -122,7 +123,7 @@ public class ProductsDisplay extends AppCompatActivity {
             intent.putExtra("SELLER_ID", product.getSeller_user_id());
             startActivity(intent);
         });
-        statusBar();
+
     }
     private void filterProductsByCategory(String categoryName) {
         productRef.orderByChild("category_name").equalTo(categoryName)
@@ -152,7 +153,6 @@ public class ProductsDisplay extends AppCompatActivity {
         findViewById(R.id.iv_favourite).setOnClickListener(v -> startActivity(new Intent(this, FavouriteActivity.class)));
         findViewById(R.id.iv_setting).setOnClickListener(v -> startActivity(new Intent(this, SettingActivity.class)));
     }
-
     private void setupSearchBar() {
         searchBar.setSpeechMode(true);
         searchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
@@ -173,28 +173,40 @@ public class ProductsDisplay extends AppCompatActivity {
         });
     }
 
+    // Perform a case-insensitive search across both product_name and category_name
     private void performSearch(String query) {
-        productRef.orderByChild("product_name").startAt(query).endAt(query + "\uf8ff")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        productList.clear();
-                        for (DataSnapshot productSnapshot : snapshot.getChildren()) {
-                            ProductS product = productSnapshot.getValue(ProductS.class);
-                            if (product != null) {
-                                productList.add(product);
-                            }
-                        }
-                        productAdapter.notifyDataSetChanged();
-                    }
+        String lowerCaseQuery = query.toLowerCase(); // Convert search query to lowercase
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(ProductsDisplay.this, "Search failed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Searching for: " + query, Toast.LENGTH_SHORT).show();
+
+        productRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                productList.clear();
+                for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+                    ProductS product = productSnapshot.getValue(ProductS.class);
+                    if (product != null) {
+                        // Convert product name and category name to lowercase
+                        String productName = product.getProduct_name().toLowerCase();
+                        String categoryName = product.getCategory_name().toLowerCase();
+
+                        // If query matches product name OR category name
+                        if (productName.contains(lowerCaseQuery) || categoryName.contains(lowerCaseQuery)) {
+                            productList.add(product);
+                        }
                     }
-                });
+                }
+                productAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ProductsDisplay.this, "Search failed", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
+    // Start Voice Recognition
     private void startVoiceRecognition() {
         try {
             Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -204,6 +216,29 @@ public class ProductsDisplay extends AppCompatActivity {
             startActivityForResult(intent, VOICE_SEARCH_REQUEST_CODE);
         } catch (ActivityNotFoundException e) {
             Toast.makeText(this, "Voice search not supported on this device", Toast.LENGTH_SHORT).show();
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == VOICE_SEARCH_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            ArrayList<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            if (results != null && !results.isEmpty()) {
+                String voiceQuery = results.get(0); // Get the recognized speech result
+
+                // Set text in search bar and ensure visibility
+                searchBar.setText(voiceQuery);
+                searchBar.openSearch(); // Open the search bar to make text visible
+                searchBar.requestFocus(); // Ensure it gains focus
+
+                // Manually trigger the text change listener
+                searchBar.getSearchEditText().setText(voiceQuery);
+                searchBar.getSearchEditText().setSelection(voiceQuery.length());
+
+                // Perform search with the voice input
+                performSearch(voiceQuery);
+            }
         }
     }
     private void statusBar(){
@@ -220,6 +255,83 @@ public class ProductsDisplay extends AppCompatActivity {
         }
     }
 }
+
+
+    // Handle Voice Search Results
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == VOICE_SEARCH_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+//            ArrayList<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+//            if (results != null && !results.isEmpty()) {
+//                String voiceQuery = results.get(0); // Get the recognized speech result
+//
+//                // Set the recognized text in the search bar
+//                searchBar.setText(voiceQuery);
+//
+//                // Perform search with the voice input
+//                performSearch(voiceQuery);
+//            }
+//        }
+//    }
+
+//
+//    private void setupSearchBar() {
+//        searchBar.setSpeechMode(true);
+//        searchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
+//            @Override
+//            public void onSearchStateChanged(boolean b) {}
+//
+//            @Override
+//            public void onSearchConfirmed(CharSequence text) {
+//                performSearch(text.toString());
+//            }
+//
+//            @Override
+//            public void onButtonClicked(int buttonCode) {
+//                if (buttonCode == MaterialSearchBar.BUTTON_SPEECH) {
+//                    startVoiceRecognition();
+//                }
+//            }
+//        });
+//    }
+//
+//    private void performSearch(String query) {
+//        productRef.orderByChild("product_name").startAt(query).endAt(query + "\uf8ff")
+//                .addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        productList.clear();
+//                        for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+//                            ProductS product = productSnapshot.getValue(ProductS.class);
+//                            if (product != null) {
+//                                productList.add(product);
+//                            }
+//                        }
+//                        productAdapter.notifyDataSetChanged();
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//                        Toast.makeText(ProductsDisplay.this, "Search failed", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//    }
+//
+//    private void startVoiceRecognition() {
+//        try {
+//            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+//            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+//            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+//            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak to search");
+//            startActivityForResult(intent, VOICE_SEARCH_REQUEST_CODE);
+//        } catch (ActivityNotFoundException e) {
+//            Toast.makeText(this, "Voice search not supported on this device", Toast.LENGTH_SHORT).show();
+//        }
+//    }
+
+
 
 
 //package com.example.oneshop.ProductDisplay;
@@ -436,7 +548,7 @@ public class ProductsDisplay extends AppCompatActivity {
 //        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak to search");
 //
 //        try {
-//            startActivityForResult(intent, VOICE_SEARCH_REQUEST_CODE);
+ //           startActivityForResult(intent, VOICE_SEARCH_REQUEST_CODE);
 //        } catch (ActivityNotFoundException e) {
 //            Toast.makeText(this, "Voice search is not supported on your device", Toast.LENGTH_SHORT).show();
 //        }

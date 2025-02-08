@@ -57,6 +57,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-database")
+   // implementation ("com.google.firebase:firebase-core")
     // Lottie Animation
     implementation("com.airbnb.android:lottie:5.2.0")
 
@@ -70,7 +71,8 @@ dependencies {
     implementation ("androidx.recyclerview:recyclerview:1.2.1")
     implementation ("com.squareup.picasso:picasso:2.71828")
 
-    //implementation 'com.github.bumptech.glide:glide:4.15.1'
-    //annotationProcessor 'com.github.bumptech.glide:compiler:4.15.1'
+    // UddoktaPay SDK
+    implementation ("com.github.uddoktapay:UddoktaPayAndroidSDK:ultra.2.0")
+    implementation ("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
 
 }

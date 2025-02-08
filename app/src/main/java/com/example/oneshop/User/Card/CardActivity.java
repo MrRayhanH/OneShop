@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,8 @@ import com.example.oneshop.ProductsClass.ProductS;
 import com.example.oneshop.R;
 import com.example.oneshop.User.Setting.SettingActivity;
 import com.example.oneshop.User.Order.OrderActivity;
+import com.example.oneshop.databinding.ActivityCardBinding;
+import com.example.oneshop.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.help5g.uddoktapaysdk.UddoktaPay;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -47,11 +51,20 @@ public class CardActivity extends AppCompatActivity implements CardAdapter.OnIte
     private DatabaseReference cartRef;
     private List<ProductS> productList;
     private CardAdapter cardAdapter;
+    // Constants for payment
+    private static final String API_KEY = "982d381360a69d419689740d9f2e26ce36fb7a50";
+    private static final String CHECKOUT_URL = "https://sandbox.uddoktapay.com/api/checkout-v2";
+    private static final String VERIFY_PAYMENT_URL = "https://sandbox.uddoktapay.com/api/verify-payment";
+    private static final String REDIRECT_URL = "https://your-site.com";
+    private static final String CANCEL_URL = "https://your-site.com";
+    public ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_card);
+        //setContentView(R.layout.activity_card);
+        ActivityCardBinding binding = ActivityCardBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         priceTextView = findViewById(R.id.tv_total_price);
@@ -68,10 +81,11 @@ public class CardActivity extends AppCompatActivity implements CardAdapter.OnIte
         recyclerView.setAdapter(cardAdapter);
 
         paymentButton.setOnClickListener(v -> {
-            createOrder();
-            Intent intent = new Intent(CardActivity.this, OrderActivity.class);
-            startActivity(intent);
-            Toast.makeText(CardActivity.this, "Order Created and Payment Done", Toast.LENGTH_SHORT).show();
+            payment();
+//            createOrder();
+//            Intent intent = new Intent(CardActivity.this, OrderActivity.class);
+//            startActivity(intent);
+//            Toast.makeText(CardActivity.this, "Order Created and Payment Done", Toast.LENGTH_SHORT).show();
         });
 
         setupNavigation();
@@ -195,66 +209,8 @@ public class CardActivity extends AppCompatActivity implements CardAdapter.OnIte
     private String getCurrentTimestamp() {
         return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault()).format(new Date());
     }
-//    private void createOrder() {
-//        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-//        String userId = currentUser.getUid();
-//        String orderId = FirebaseDatabase.getInstance().getReference("Orders").push().getKey();
-//
-//        Map<String, List<ProductS>> productsGroupedBySeller = groupProductsBySeller();
-//
-//        DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference("Orders").child(orderId);
-//        Map<String, Object> orderDetails = new HashMap<>();
-//        orderDetails.put("user_id", userId);
-//        orderDetails.put("total_price", totalPrice);  // Use the correctly calculated totalPrice
-//        orderDetails.put("total_quantity", totalProducts);  // Use the correctly calculated totalQuantity
-//        orderDetails.put("order_status", "Pending");
-//        orderDetails.put("order_id", orderId);
-//        ordersRef.setValue(orderDetails);
-//
-//        // Create sub-orders for each seller
-//        for (Map.Entry<String, List<ProductS>> entry : productsGroupedBySeller.entrySet()) {
-//            String sellerId = entry.getKey();
-//            List<ProductS> sellerProducts = entry.getValue();
-//
-//            String sellerSubOrderId = ordersRef.child("sub_orders").push().getKey();
-//            DatabaseReference sellerSubOrderRef = ordersRef.child("sub_orders").child(sellerSubOrderId);
-//
-//            Map<String, Object> sellerOrderDetails = new HashMap<>();
-//            sellerOrderDetails.put("seller_id", sellerId);
-//            sellerOrderDetails.put("products", sellerProducts);
-//            sellerOrderDetails.put("total_price", calculateTotalPriceForSeller(sellerProducts));
-//            sellerOrderDetails.put("order_status", "Pending");
-//            sellerSubOrderRef.setValue(sellerOrderDetails);
-//
-//            // Create OrderItems for each product and save to Order_Items
-//            for (ProductS product : sellerProducts) {
-//                OrderItem orderItem = new OrderItem(orderId, product.getProduct_id(), sellerId, product.getPrice(), product.getQuantity());
-//                DatabaseReference orderItemsRef = FirebaseDatabase.getInstance().getReference("Order_Items");
-//                orderItemsRef.push().setValue(orderItem);
-//            }
-//        }
-//    }
 
-    private Map<String, List<ProductS>> groupProductsBySeller() {
-        Map<String, List<ProductS>> groupedProducts = new HashMap<>();
 
-        for (ProductS product : productList) {
-            String sellerId = product.getSeller_user_id();
-            if (!groupedProducts.containsKey(sellerId)) {
-                groupedProducts.put(sellerId, new ArrayList<>());
-            }
-            groupedProducts.get(sellerId).add(product);
-        }
-        return groupedProducts;
-    }
-
-    private double calculateTotalPriceForSeller(List<ProductS> sellerProducts) {
-        double total = 0;
-        for (ProductS product : sellerProducts) {
-            total += product.getPrice() * product.getQuantity();
-        }
-        return total;
-    }
 
     @Override
     public void onItemClick(ProductS product) {
@@ -270,6 +226,41 @@ public class CardActivity extends AppCompatActivity implements CardAdapter.OnIte
         findViewById(R.id.iv_home).setOnClickListener(v -> startActivity(new Intent(CardActivity.this, ProductsDisplay.class)));
         findViewById(R.id.iv_favourite).setOnClickListener(v -> startActivity(new Intent(CardActivity.this, FavouriteActivity.class)));
         findViewById(R.id.iv_setting).setOnClickListener(v -> startActivity(new Intent(CardActivity.this, SettingActivity.class)));
+    }
+    private void payment() {
+        updateTotals(); // Ensure price is updated before payment
+
+        String enteredAmount = String.valueOf(totalPrice);
+        Map<String, String> metadataMap = new HashMap<>();
+
+        UddoktaPay.PaymentCallback paymentCallback = new UddoktaPay.PaymentCallback() {
+            @Override
+            public void onPaymentStatus(String status, String fullName, String email, String amount, String invoiceId,
+                                        String paymentMethod, String senderNumber, String transactionId,
+                                        String date, Map<String, String> metadataValues, String fee, String chargeAmount) {
+                runOnUiThread(() -> {
+                    WebView payView = findViewById(R.id.payView);
+                    if ("COMPLETED".equals(status)) {
+                        payView.setVisibility(View.GONE);
+                        createOrder();
+                        Intent intent = new Intent(CardActivity.this, OrderActivity.class);
+                        startActivity(intent);
+                        Toast.makeText(CardActivity.this, "Order Created and Payment Done", Toast.LENGTH_SHORT).show();
+                    } else if ("PENDING".equals(status)) {
+                        Toast.makeText(CardActivity.this, "Payment Pending", Toast.LENGTH_SHORT).show();
+                    } else if ("ERROR".equals(status)) {
+                        Toast.makeText(CardActivity.this, "Payment Error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        };
+
+        WebView payView = findViewById(R.id.payView);
+        payView.setVisibility(View.VISIBLE); // Ensure the WebView is visible
+
+        UddoktaPay uddoktapay = new UddoktaPay(payView, paymentCallback);
+        uddoktapay.loadPaymentForm(API_KEY, "Rayhan", "Raynan@gmai.com", enteredAmount,
+                CHECKOUT_URL, VERIFY_PAYMENT_URL, REDIRECT_URL, CANCEL_URL, metadataMap);
     }
     private void statusBar(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

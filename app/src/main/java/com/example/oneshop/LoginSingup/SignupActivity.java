@@ -54,7 +54,7 @@ public class SignupActivity extends AppCompatActivity {
 
         iv_eye1st.setOnClickListener(v -> togglePasswordVisibility(et_Password, iv_eye1st, true));
         iv_eye2nd.setOnClickListener(v -> togglePasswordVisibility(et_ConfirmPassword, iv_eye2nd, false));
-
+        statusbar();
         btn_Register.setOnClickListener(v -> {
             String username = et_Username.getText().toString();
             String email = et_Email.getText().toString();
@@ -168,5 +168,17 @@ public class SignupActivity extends AppCompatActivity {
         LottieAnimationView lottieLoader = findViewById(R.id.lottiePopup);
         lottieLoader.setVisibility(View.VISIBLE);
         lottieLoader.playAnimation();
+    }
+    private void statusbar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.status_bar_color_white));
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
     }
 }

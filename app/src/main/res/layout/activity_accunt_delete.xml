@@ -6,15 +6,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".User.AccuntDeleteActivity">
-
+    <!-- Toolbar -->
     <!-- Button to delete account -->
+    <LinearLayout
+        android:id="@+id/toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/Primary"
+        android:gravity="center"
+        android:padding="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Accunt Delete"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/btn_delete_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete Account"
         android:textColor="@android:color/white"
-        android:background="@color/colorAccent"
+        android:backgroundTint="@color/Primary"
         android:layout_centerInParent="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"

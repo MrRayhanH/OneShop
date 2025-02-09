@@ -52,14 +52,14 @@
                 android:text="Experience like shopping from Home"
                 android:textSize="16sp" />
 
-            <!-- Account Security -->
             <TextView
-                android:id="@+id/account_security"
+                android:id="@+id/tv_Reset_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackground"
                 android:padding="12dp"
-                android:text="Account is Secure in our privacy"
+                android:text="Reset Your password"
+                android:textColor="@color/Primary"
                 android:textSize="16sp" />
 
             <!-- Address Book -->
@@ -72,6 +72,8 @@
                 android:text="Click to check your Address"
                 android:textColor="@color/Primary"
                 android:textSize="16sp" />
+
+
 
             <!-- Request Account Deletion -->
             <TextView

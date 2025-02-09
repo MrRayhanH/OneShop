@@ -28,10 +28,9 @@ public class SendVerificationActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null) {
-            if(user.isEmailVerified()) {Intent intent = new Intent(SendVerificationActivity.this, LoginActivity.class);}
+            if(user.isEmailVerified()) {Intent intent = new Intent(SendVerificationActivity.this, LoginActivity.class); startActivity(intent);}
             else {
                 resendCode.setOnClickListener(v -> {
-                    //if(user.isEmailVerified()) {Intent intent = new Intent(SendVerificationActivity.this, LoginActivity.class);}
                     user.sendEmailVerification();
                     Toast.makeText(SendVerificationActivity.this, "Verification email sent!", Toast.LENGTH_SHORT).show();
                 });

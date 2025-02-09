@@ -40,7 +40,6 @@ public class InsertProductActivity extends AppCompatActivity {
     private Spinner categorySpinner;
     private ImageView ivProductImage;
     private Button btnInsertProduct;
-
     private Uri imageUri;
     private FirebaseAuth auth;
     private DatabaseReference categoryRef, productRef;

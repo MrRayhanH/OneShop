@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.oneshop.Password.ResetPasswordActivity;
 import com.example.oneshop.R;
 import com.example.oneshop.User.AccuntDeleteActivity;
 import com.example.oneshop.User.AddressActivity;
@@ -35,13 +36,21 @@ public class SettingActivity extends AppCompatActivity {
         card = findViewById(R.id.iv_card);
         favourite = findViewById(R.id.iv_favourite);
         TextView address_book = findViewById(R.id.address_book);
-        address_book.setOnClickListener(v -> {startActivity(new Intent(SettingActivity.this, AddressActivity.class));});
         TextView account_delet = findViewById(R.id.request_account_deletion);
+        TextView reset_password = findViewById(R.id.tv_Reset_password);
+
+
+        address_book.setOnClickListener(v -> {startActivity(new Intent(SettingActivity.this, AddressActivity.class));});
+        reset_password.setOnClickListener(v -> {startActivity(new Intent(SettingActivity.this, ResetPasswordActivity.class));});
+        btn_order.setOnClickListener(v -> {startActivity(new Intent(SettingActivity.this, OrderActivity.class));});
+        account_delet.setOnClickListener(v -> {startActivity(new Intent(SettingActivity.this, AccuntDeleteActivity.class));});
+
+        // main 3 page
         home.setOnClickListener(v -> {startActivity(new Intent(SettingActivity.this, ProductsDisplay.class));});
         card.setOnClickListener(v -> {startActivity(new Intent(SettingActivity.this, CardActivity.class));});
         favourite.setOnClickListener(v -> {startActivity(new Intent(SettingActivity.this, FavouriteActivity.class));});
-        btn_order.setOnClickListener(v -> {startActivity(new Intent(SettingActivity.this, OrderActivity.class));});
-        account_delet.setOnClickListener(v -> {startActivity(new Intent(SettingActivity.this, AccuntDeleteActivity.class));});
+
+
         btn_logout.setOnClickListener(v -> {
             FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
             firebaseAuth.signOut();
